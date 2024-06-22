@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tempest Engine Dev</title>
+    <link>https://yggdrasil-917.github.io/</link>
+    <description>Recent content on Tempest Engine Dev</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Jun 2024 13:47:59 -0700</lastBuildDate>
+    <atom:link href="https://yggdrasil-917.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About This Site</title>
+      <link>https://yggdrasil-917.github.io/about/</link>
+      <pubDate>Fri, 21 Jun 2024 13:47:59 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/about/</guid>
+      <description>My name is Xavi and I&amp;rsquo;m the lead rendering engineer at Magnopus. Previously worked in the game industry doing a bit of everything on the programming side before focusing on engine development.&#xA;This site is here to blog about the Tempest engine&amp;rsquo;s development progress.</description>
+    </item>
+  </channel>
+</rss>
