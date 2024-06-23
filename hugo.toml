@@ -39,7 +39,7 @@ enableEmoji = true
     
   [[params.socialLinks]]
     name = "email"
-    url = "yggdrasil.917@gmail.com"
+    url = "mailto:yggdrasil.917@gmail.com"
 
 [menu]
   
