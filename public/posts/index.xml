@@ -1,19 +1,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Posts on Tempest Engine Dev</title>
-		<link>http://localhost:1313/posts/</link>
+		<link>https://yggdrasil-917.github.io/posts/</link>
 		<description>Recent content in Posts on Tempest Engine Dev</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
 		<lastBuildDate>Sun, 23 Jun 2024 06:40:54 -0700</lastBuildDate>
-		<atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+		<atom:link href="https://yggdrasil-917.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>Tempest Engine</title>
-			<link>http://localhost:1313/posts/tempest-engine/tempest-engine/</link>
+			<link>https://yggdrasil-917.github.io/posts/tempest-engine/tempest-engine/</link>
 			<pubDate>Sun, 23 Jun 2024 06:40:54 -0700</pubDate>
 			
-			<guid>http://localhost:1313/posts/tempest-engine/tempest-engine/</guid>
+			<guid>https://yggdrasil-917.github.io/posts/tempest-engine/tempest-engine/</guid>
 			<description><![CDATA[%!s(<nil>)]]></description>
 			<content type="html"><![CDATA[<h1 id="table-of-contents">Table of Contents</h1>
 <ol>

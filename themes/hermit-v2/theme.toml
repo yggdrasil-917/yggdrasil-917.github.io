@@ -11,6 +11,7 @@ features = [
   "social icons",
   "google analytics",
   "disqus",
+  "utterances",
   "customizable"
 ]
 

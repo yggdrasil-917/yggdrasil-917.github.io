@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tempest Engine Dev</title>
-    <link>http://localhost:1313/</link>
+    <link>https://yggdrasil-917.github.io/</link>
     <description>Recent content on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 23 Jun 2024 06:40:54 -0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yggdrasil-917.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tempest Engine</title>
-      <link>http://localhost:1313/posts/tempest-engine/tempest-engine/</link>
+      <link>https://yggdrasil-917.github.io/posts/tempest-engine/tempest-engine/</link>
       <pubDate>Sun, 23 Jun 2024 06:40:54 -0700</pubDate>
-      <guid>http://localhost:1313/posts/tempest-engine/tempest-engine/</guid>
+      <guid>https://yggdrasil-917.github.io/posts/tempest-engine/tempest-engine/</guid>
       <description>Table of Contents Introduction Why Build A New Engine Pros Cons Conclusion Introduction About two years ago I had started building a new engine in C++ with the initial intention of having some base framework I could experiment with and also challenging myself to build a proper game editor since I had yet to do that. I had built a few engines in the past but it was always with the intention of learning more things so I generally avoided using third party libraries.</description>
     </item>
     <item>
       <title>About This Site</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://yggdrasil-917.github.io/about/</link>
       <pubDate>Fri, 21 Jun 2024 13:47:59 -0700</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://yggdrasil-917.github.io/about/</guid>
       <description>My name is Xavi and I&amp;rsquo;m the lead rendering engineer at Magnopus. Previously worked in the game industry doing a bit of everything on the programming side before focusing on engine development.&#xA;This site is here to blog about the Tempest engine&amp;rsquo;s development progress.</description>
     </item>
   </channel>

@@ -10,10 +10,12 @@ enableEmoji = true
 
 [taxonomies]
   tag = "tags"
-  
-[services]
-  [services.disqus]
-    shortname = ''
+
+[params.utterances]
+  repo = "yggdrasil-917/yggdrasil-917.github.io"
+  theme = "github-dark"
+  issueTerm = "pathname"
+  label="comments"
 
 [frontmatter]
   date = ["date", "publishDate", "lastmod"]

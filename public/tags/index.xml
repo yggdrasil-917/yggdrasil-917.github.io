@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Tempest Engine Dev</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://yggdrasil-917.github.io/tags/</link>
     <description>Recent content in Tags on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 23 Jun 2024 06:40:54 -0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yggdrasil-917.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Engine</title>
-      <link>http://localhost:1313/tags/engine/</link>
+      <link>https://yggdrasil-917.github.io/tags/engine/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/engine/</guid>
+      <guid>https://yggdrasil-917.github.io/tags/engine/</guid>
       <description></description>
     </item>
   </channel>
