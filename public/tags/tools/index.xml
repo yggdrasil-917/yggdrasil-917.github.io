@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tools on Tempest Engine Dev</title>
-    <link>https://yggdrasil-917.github.io/tags/tools/</link>
+    <link>http://localhost:1313/tags/tools/</link>
     <description>Recent content in Tools on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 26 Jun 2024 08:40:45 -0700</lastBuildDate>
-    <atom:link href="https://yggdrasil-917.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Asset System</title>
-      <link>https://yggdrasil-917.github.io/posts/asset-system/asset-system/</link>
+      <link>http://localhost:1313/posts/asset-system/asset-system/</link>
       <pubDate>Wed, 26 Jun 2024 08:40:45 -0700</pubDate>
-      <guid>https://yggdrasil-917.github.io/posts/asset-system/asset-system/</guid>
+      <guid>http://localhost:1313/posts/asset-system/asset-system/</guid>
       <description>Table of Contents Assets AssetLifetime AssetRegistry Cooking CookOnTheFly OfflineCooking Assets The Tempest engine, like most other engines out there, has a concept of an asset along with an asset manager that can handle asset lifetimes as well as asset cooking. The engine contains a base class that all asset types derive from. A simplified version of that Asset base class is below.&#xA;struct AssetHandle { // This contains the unique path to the asset, stored as a string // and a hash value of that path evaluated at compile time using constexpr.</description>
     </item>
   </channel>

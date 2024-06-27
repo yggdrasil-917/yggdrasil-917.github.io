@@ -16,20 +16,24 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#494f5c"><meta name="author" content="">
 
   <meta itemprop="name" content="Serialization">
-  <meta itemprop="datePublished" content="2024-06-26T09:18:58-07:00">
-  <meta itemprop="dateModified" content="2024-06-26T09:18:58-07:00">
-  <meta itemprop="keywords" content="Untagged"><meta property="og:url" content="http://localhost:1313/posts/serialization/serialization/">
+  <meta itemprop="description" content="Table of Contents Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
+  <meta itemprop="datePublished" content="2024-06-27T07:28:57-07:00">
+  <meta itemprop="dateModified" content="2024-06-27T07:28:57-07:00">
+  <meta itemprop="wordCount" content="947">
+  <meta itemprop="keywords" content="Serialization"><meta property="og:url" content="http://localhost:1313/posts/serialization/serialization/">
   <meta property="og:site_name" content="Tempest Engine Dev">
   <meta property="og:title" content="Serialization">
+  <meta property="og:description" content="Table of Contents Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-06-26T09:18:58-07:00">
-    <meta property="article:modified_time" content="2024-06-26T09:18:58-07:00">
-    <meta property="article:tag" content="Untagged">
+    <meta property="article:published_time" content="2024-06-27T07:28:57-07:00">
+    <meta property="article:modified_time" content="2024-06-27T07:28:57-07:00">
+    <meta property="article:tag" content="Serialization">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Serialization">
+  <meta name="twitter:description" content="Table of Contents Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
 <title>Serialization</title>
 <link rel="stylesheet dns-prefetch preconnect preload prefetch" as="style" href="http://localhost:1313/css/style.min.53a53ff9a700cf26a907d20cff4ca6268650da3c0980ef01164d230678d732e7.css" integrity="sha256-U6U/+acAzyapB9IM/0ymJoZQ2jwJgO8BFk0jBnjXMuc=" crossorigin="anonymous">
 	</head>
@@ -81,26 +85,82 @@
 
 	<main class="site-main section-inner animated fadeIn faster"><article class="thin">
 			<header class="post-header">
-				<div class="post-meta"><span>Jun 26, 2024</span></div>
+				<div class="post-meta"><span>Jun 27, 2024</span></div>
 				<h1>Serialization</h1>
 			</header>
 			<div class="post-info"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg><a href="" target="_blank"></a></p>
-<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://localhost:1313/tags/untagged">untagged</a></span></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://localhost:1313/tags/serialization">serialization</a></span></p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
     
     
     
     
-    </p>
-<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-06-26 09:18 -0700</p></div>
+    4 Minutes, 18 Seconds</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-06-27 07:28 -0700</p></div>
 			<hr class="post-end">
 			<div class="content">
-				
+				<h1 id="table-of-contents">Table of Contents<a href="#table-of-contents" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li><a href="#pupping">Pupping</a></li>
+<li><a href="#text-file-pupping">Text Pupping</a></li>
+<li><a href="#binary-file-pupping">Binary Pupping</a></li>
+<li><a href="#random-thoughts">Random Thoughts</a></li>
+</ul>
+<h2 id="pupping">Pupping<a href="#pupping" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type. A pupper object will contain all the data and functions needed to handle both reading and writing for a specific medium like file or network serialization. Take for example, a text file pupper object might contain a file stream that each pup function would use to read and write with it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Base class snippet for every pupper object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Pupper</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">enum</span> <span class="k">class</span> <span class="nc">IoMode</span> <span class="o">:</span> <span class="n">uint8</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Read</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Write</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">WriteKey</span><span class="p">(</span><span class="k">const</span> <span class="n">String</span><span class="o">&amp;</span> <span class="cm">/*newKey*/</span><span class="p">,</span> <span class="kt">bool</span> <span class="cm">/*addNewLine */</span><span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="kt">char</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">String</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">uint8</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">uint16</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">uint32</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">uint64</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">int8</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">int16</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">int32</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">int64</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="n">half</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="kt">float</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="kt">double</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">PupPrimitive</span><span class="p">(</span><span class="kt">bool</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Any extra functions...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">IoMode</span> <span class="n">mode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h2 id="text-file-pupping">Text File Pupping<a href="#text-file-pupping" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>It is always a good idea to support text based serialization. In Tempest, the text file pupper implements the Pupper base class posted above. There are some missing functions in that snippet but are crucial functions for text file serialization. One of the biggest advantages of using text based serialization is that it is human readable and so it is also very easy to edit and version control. In the editor most things will use this text file pupper object. In the game, game settings are stored in text but everything else is stored in binary.</p>
+<p>During the development of the format the text pupper uses I realized I was using a very verbose schema for the text serialization. It was kinda a simpler XML style and this was not really an ideal outcome in my opinion. In the end the schema was redone to look similar to what YAML does. This lead to the serialized text being easier to read and edit. Plus it was also easier to parse so it got a little faster after the reimplementation. The schema YAML uses is essentially a key value pair where the value can be a simple POD(plain old data type) or it could be an array. This is the same for the text file pupper does. Arrays and string value types need to serialize a little bit more data, namely the length of the array or string.</p>
+<p>The text file pupper essentially boils down to using a file stream for reading and writing. When deserializing, the pupper loads all the text file&rsquo;s content into RAM so as to avoid reading from disk every time it reads a variables data. This means it operates on a binary blob buffer when reading data and this leads to optimal performance. For serialization it just uses the file stream object directly every time it writes data for a variable instead of writing to a binary blob in memory.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Same functions get used for both serialization and deserialization
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Pupper</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">uint32</span> <span class="n">version</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">-&gt;</span><span class="n">WriteKey</span><span class="p">(</span><span class="s">&#34;Version&#34;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="n">PupPrimitive</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">version</span><span class="p">);</span>
+</span></span></code></pre></div><h2 id="binary-file-pupping">Binary File Pupping<a href="#binary-file-pupping" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>The binary file pupper object works exactly the same as the text file pupper. The only difference is that the pup functions for reading and writing are working with binary data instead of text. This is the pupper of choice for serializing assets and several other things in the engine. This allows serialization to take less disk space and generally makes it fast to load at runtime.</p>
+<h2 id="random-thoughts">Random Thoughts<a href="#random-thoughts" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>When serializing structs, it&rsquo;s important to also serialize data that can identify the version of that struct. This allows for versioning the data of a struct that gets serialized. For example, if a member variable is removed from serialization you will want to know if you are loading serialized data that still has that removed variable. With a simple version number on the struct being serialized you can have a more robust serialization system. In the example given, after removing the variable from serialization you would also increment the version number for that struct. Then during deserialization you can compare the serialized version number against what the latest struct version number is and then make decisions according to those differences. In Tempest 4 bytes are used to represent the version number of a struct, a uint32. This is likely a bit too much for most cases where maybe 2 or even 1 byte might be enough to represent all possible versions of a certain struct before launching a game.</p>
+<p>Also worth mentioning is that new kinds of pupper objects can be created that are not simply writing to a local file. For instance, if you need a network serializer then this is possible to do using this framework. The same kinds of read and write functions can be overwritten to write to memory buffer and at a later point just sent over the network. I&rsquo;m sure there are plenty of other use cases where this pupping framework can be applied to great success and the best part about it is that it is very simple to implement and maintain.</p>
+
 			</div>
 		</article>
 		<div class="post-nav thin">
-			<a class="prev-post" href="http://localhost:1313/posts/shader-compiler/shader-compiler/">
-				<span class="post-nav-label">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Shader Compiler</span>
+			<a class="prev-post" href="http://localhost:1313/posts/asset-system/asset-system/">
+				<span class="post-nav-label">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Asset System</span>
 			</a>
 		</div>
 		<div id="comments" class="thin">
@@ -120,7 +180,8 @@
 		&copy; 2024 <a href="http://localhost:1313/"></a>
 		&#183; XGH
 		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
-		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a></p>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
+		&#183; <a href="http://localhost:1313/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
 
 </footer>
 <script async src="http://localhost:1313/js/bundle.min.c7c384e4d29d192bbac6811ae4660bb01767194a5bea56baca77e8260f93ea16.js" integrity="sha256-x8OE5NKdGSu6xoEa5GYLsBdnGUpb6la6ynfoJg+T6hY=" crossorigin="anonymous"></script><script async src="http://localhost:1313/js/link-share.min.24409a4f6e5537d70ffc55ec8f9192208d718678cb8638585342423020b37f39.js" integrity="sha256-JECaT25VN9cP/FXsj5GSII1xhnjLhjhYU0JCMCCzfzk=" crossorigin="anonymous"></script>
