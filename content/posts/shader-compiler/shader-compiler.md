@@ -6,6 +6,7 @@ toc: false
 images:
 tags: 
   - shaders
+  - tools
 ---
 
 * [Editor Integration](#editor-integration)
