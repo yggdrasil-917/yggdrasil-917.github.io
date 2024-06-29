@@ -10,7 +10,6 @@ tags:
   - assets
 ---
 
-# Table of Contents
 * [Assets](#assets)
 * [AssetLifetime](#asset-lifetime)
 * [AssetRegistry](#asset-registry)

@@ -8,7 +8,6 @@ tags:
   - engine
 ---
 
-# Table of Contents
 1. [Introduction](#introduction)
 2. [Why Build A New Engine](#why-build-a-new-engine)
 3. [Pros](#pros)
