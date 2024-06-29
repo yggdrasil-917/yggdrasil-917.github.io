@@ -8,7 +8,6 @@ tags:
   - serialization
 ---
 
-# Table of Contents
 * [Pupping](#pupping)
 * [Text Pupping](#text-file-pupping)
 * [Binary Pupping](#binary-file-pupping)
