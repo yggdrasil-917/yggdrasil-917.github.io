@@ -13,7 +13,7 @@
       <link>https://yggdrasil-917.github.io/posts/serialization/serialization/</link>
       <pubDate>Thu, 27 Jun 2024 07:28:57 -0700</pubDate>
       <guid>https://yggdrasil-917.github.io/posts/serialization/serialization/</guid>
-      <description>Table of Contents Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.</description>
+      <description>Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.</description>
     </item>
   </channel>
 </rss>

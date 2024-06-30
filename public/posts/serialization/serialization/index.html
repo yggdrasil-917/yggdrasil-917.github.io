@@ -16,14 +16,14 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#494f5c"><meta name="author" content="">
 
   <meta itemprop="name" content="Serialization">
-  <meta itemprop="description" content="Table of Contents Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
+  <meta itemprop="description" content="Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
   <meta itemprop="datePublished" content="2024-06-27T07:28:57-07:00">
   <meta itemprop="dateModified" content="2024-06-27T07:28:57-07:00">
-  <meta itemprop="wordCount" content="947">
+  <meta itemprop="wordCount" content="944">
   <meta itemprop="keywords" content="Serialization"><meta property="og:url" content="https://yggdrasil-917.github.io/posts/serialization/serialization/">
   <meta property="og:site_name" content="Tempest Engine Dev">
   <meta property="og:title" content="Serialization">
-  <meta property="og:description" content="Table of Contents Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
+  <meta property="og:description" content="Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -33,7 +33,7 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Serialization">
-  <meta name="twitter:description" content="Table of Contents Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
+  <meta name="twitter:description" content="Pupping Text Pupping Binary Pupping Random Thoughts Pupping The method used for serialization in Tempest is referred to as pupping or pup which stands for pack-unpack. I first heard about this method close to a decade ago but the idea of it stuck with me. That idea is fairly simple. Rather than creating serilization and deserialization functions for each object type we instead create pupper objects for each type of medium bundled with a set of read and write functions for each fundamental data type.">
 <title>Serialization</title>
 <link rel="stylesheet dns-prefetch preconnect preload prefetch" as="style" href="https://yggdrasil-917.github.io/css/style.min.53a53ff9a700cf26a907d20cff4ca6268650da3c0980ef01164d230678d732e7.css" integrity="sha256-U6U/+acAzyapB9IM/0ymJoZQ2jwJgO8BFk0jBnjXMuc=" crossorigin="anonymous">
 	</head>
@@ -95,12 +95,11 @@
     
     
     
-    4 Minutes, 18 Seconds</p>
+    4 Minutes, 17 Seconds</p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-06-27 07:28 -0700</p></div>
 			<hr class="post-end">
 			<div class="content">
-				<h1 id="table-of-contents">Table of Contents<a href="#table-of-contents" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
-<ul>
+				<ul>
 <li><a href="#pupping">Pupping</a></li>
 <li><a href="#text-file-pupping">Text Pupping</a></li>
 <li><a href="#binary-file-pupping">Binary Pupping</a></li>
@@ -159,6 +158,9 @@
 			</div>
 		</article>
 		<div class="post-nav thin">
+			<a class="next-post" href="https://yggdrasil-917.github.io/posts/shader-compiler/shader-compiler/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;</span><br><span>Shader Compiler</span>
+			</a>
 			<a class="prev-post" href="https://yggdrasil-917.github.io/posts/asset-system/asset-system/">
 				<span class="post-nav-label">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Asset System</span>
 			</a>
@@ -180,7 +182,8 @@
 		&copy; 2024 <a href="https://yggdrasil-917.github.io/"></a>
 		&#183; XGH
 		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
-		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a></p>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
+		&#183; <a href="https://yggdrasil-917.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
 
 </footer>
 <script async src="https://yggdrasil-917.github.io/js/bundle.min.c7c384e4d29d192bbac6811ae4660bb01767194a5bea56baca77e8260f93ea16.js" integrity="sha256-x8OE5NKdGSu6xoEa5GYLsBdnGUpb6la6ynfoJg+T6hY=" crossorigin="anonymous"></script><script async src="https://yggdrasil-917.github.io/js/link-share.min.24409a4f6e5537d70ffc55ec8f9192208d718678cb8638585342423020b37f39.js" integrity="sha256-JECaT25VN9cP/FXsj5GSII1xhnjLhjhYU0JCMCCzfzk=" crossorigin="anonymous"></script>

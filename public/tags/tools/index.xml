@@ -6,8 +6,22 @@
     <description>Recent content in Tools on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Jun 2024 08:40:45 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 30 Jun 2024 10:21:04 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Crash Reporting</title>
+      <link>https://yggdrasil-917.github.io/posts/crash-reporting/crash-reporting/</link>
+      <pubDate>Sun, 30 Jun 2024 10:21:04 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/crash-reporting/crash-reporting/</guid>
+      <description>Supporting Minidumps Crash Report Win32 UI Trigger Crash Reporter Where Reports Live If you&amp;rsquo;ve ever had to debug a fatal exception then you likely know how hard it can be to fix those issues when you only have the steps to reproduce the problem and sometimes you don&amp;rsquo;t even have that. These days a lot of things can contribute to a crash and it&amp;rsquo;s important to get as much information as you can.</description>
+    </item>
+    <item>
+      <title>Shader Compiler</title>
+      <link>https://yggdrasil-917.github.io/posts/shader-compiler/shader-compiler/</link>
+      <pubDate>Sat, 29 Jun 2024 09:27:15 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/shader-compiler/shader-compiler/</guid>
+      <description>Editor Integration Shader Cache Hot Reloading Tempest Shader These days every game engine out there is going to need to compile shaders but how they go about it tends to be somewhat different depending on the engine&amp;rsquo;s needs. At the time of this writing Tempest only supports the Windows platform and supports DirectX 12 and Vulkan. The compiler uses the dxc executable under the hood to compile for both DX12 and Vulkan.</description>
+    </item>
     <item>
       <title>Asset System</title>
       <link>https://yggdrasil-917.github.io/posts/asset-system/asset-system/</link>

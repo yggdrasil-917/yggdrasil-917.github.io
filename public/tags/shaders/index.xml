@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shaders on Tempest Engine Dev</title>
+    <link>https://yggdrasil-917.github.io/tags/shaders/</link>
+    <description>Recent content in Shaders on Tempest Engine Dev</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 29 Jun 2024 09:27:15 -0700</lastBuildDate>
+    <atom:link href="https://yggdrasil-917.github.io/tags/shaders/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shader Compiler</title>
+      <link>https://yggdrasil-917.github.io/posts/shader-compiler/shader-compiler/</link>
+      <pubDate>Sat, 29 Jun 2024 09:27:15 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/shader-compiler/shader-compiler/</guid>
+      <description>Editor Integration Shader Cache Hot Reloading Tempest Shader These days every game engine out there is going to need to compile shaders but how they go about it tends to be somewhat different depending on the engine&amp;rsquo;s needs. At the time of this writing Tempest only supports the Windows platform and supports DirectX 12 and Vulkan. The compiler uses the dxc executable under the hood to compile for both DX12 and Vulkan.</description>
+    </item>
+  </channel>
+</rss>

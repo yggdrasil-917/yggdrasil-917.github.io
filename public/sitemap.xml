@@ -2,19 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yggdrasil-917.github.io/posts/crash-reporting/crash-reporting/</loc>
+    <lastmod>2024-06-30T10:21:04-07:00</lastmod>
+  </url><url>
     <loc>https://yggdrasil-917.github.io/posts/</loc>
-    <lastmod>2024-06-29T14:27:15-07:00</lastmod>
+    <lastmod>2024-06-30T10:21:04-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/</loc>
+    <lastmod>2024-06-30T10:21:04-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/</loc>
-    <lastmod>2024-06-29T14:27:15-07:00</lastmod>
+    <lastmod>2024-06-30T10:21:04-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/tools/</loc>
+    <lastmod>2024-06-30T10:21:04-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/posts/shader-compiler/shader-compiler/</loc>
+    <lastmod>2024-06-29T09:27:15-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/shaders/</loc>
+    <lastmod>2024-06-29T09:27:15-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/tags/serialization/</loc>
     <lastmod>2024-06-27T07:28:57-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/serialization/serialization/</loc>
-    <lastmod>2024-06-27T07:28:57-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/tags/</loc>
     <lastmod>2024-06-27T07:28:57-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/asset-system/asset-system/</loc>
@@ -24,9 +36,6 @@
     <lastmod>2024-06-26T08:40:45-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/tags/engine/</loc>
-    <lastmod>2024-06-26T08:40:45-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/tags/tools/</loc>
     <lastmod>2024-06-26T08:40:45-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/tempest-engine/tempest-engine/</loc>
