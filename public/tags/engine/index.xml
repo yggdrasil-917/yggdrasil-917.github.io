@@ -6,8 +6,15 @@
     <description>Recent content in Engine on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Jun 2024 08:40:45 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2024 11:57:54 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/engine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scripting With Cpp</title>
+      <link>https://yggdrasil-917.github.io/posts/scripting-with-cpp/scripting-with-cpp/</link>
+      <pubDate>Wed, 03 Jul 2024 11:57:54 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/scripting-with-cpp/scripting-with-cpp/</guid>
+      <description>Early on in Tempest&amp;rsquo;s development it was decided not to adopt a scripting language and instead use c++, the same language used to make the engine. This more or less goes against the norm these days seeing as how most engines have a scripting language. In fact, you can probably count the number of professional engines that only offer c++ for scripting in one hand. Unreal Engine being by far the most popular one in that category.</description>
+    </item>
     <item>
       <title>Asset System</title>
       <link>https://yggdrasil-917.github.io/posts/asset-system/asset-system/</link>
