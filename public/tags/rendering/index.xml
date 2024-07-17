@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rendering on Tempest Engine Dev</title>
+    <link>https://yggdrasil-917.github.io/tags/rendering/</link>
+    <description>Recent content in Rendering on Tempest Engine Dev</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 15 Jul 2024 18:11:49 -0700</lastBuildDate>
+    <atom:link href="https://yggdrasil-917.github.io/tags/rendering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Decals</title>
+      <link>https://yggdrasil-917.github.io/posts/decals/decals/</link>
+      <pubDate>Mon, 15 Jul 2024 18:11:49 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/decals/decals/</guid>
+      <description>Tempest GBuffer How They Work Sampling Stencil Sort Order Batch Rendering GBuffer Modidfication Unique Applications Performance There are a couple of different ways to implement decals, each with their pros and cons. For this post I&amp;rsquo;ll go over how Tempest implements screen space deferred decals to modify the gbuffer in various ways. Decals tend to offer very easy ways to modify the scene while keeping shader complexity at a manageable level but at the cost of additional draw calls to render the decals.</description>
+    </item>
+  </channel>
+</rss>

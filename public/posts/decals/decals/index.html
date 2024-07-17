@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge"><meta name="robots" content="index, follow">
+<meta name="revisit-after" content="15 days"><link rel="author" href="/humans.txt">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#494f5c">
+<meta name="msapplication-TileColor" content="#494f5c">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#494f5c"><meta name="author" content="">
+
+  <meta itemprop="name" content="Decals">
+  <meta itemprop="description" content="Tempest GBuffer How They Work Sampling Stencil Sort Order Batch Rendering GBuffer Modidfication Unique Applications Performance There are a couple of different ways to implement decals, each with their pros and cons. For this post I’ll go over how Tempest implements screen space deferred decals to modify the gbuffer in various ways. Decals tend to offer very easy ways to modify the scene while keeping shader complexity at a manageable level but at the cost of additional draw calls to render the decals.">
+  <meta itemprop="datePublished" content="2024-07-15T18:11:49-07:00">
+  <meta itemprop="dateModified" content="2024-07-15T18:11:49-07:00">
+  <meta itemprop="wordCount" content="1837">
+  <meta itemprop="keywords" content="Rendering"><meta property="og:url" content="https://yggdrasil-917.github.io/posts/decals/decals/">
+  <meta property="og:site_name" content="Tempest Engine Dev">
+  <meta property="og:title" content="Decals">
+  <meta property="og:description" content="Tempest GBuffer How They Work Sampling Stencil Sort Order Batch Rendering GBuffer Modidfication Unique Applications Performance There are a couple of different ways to implement decals, each with their pros and cons. For this post I’ll go over how Tempest implements screen space deferred decals to modify the gbuffer in various ways. Decals tend to offer very easy ways to modify the scene while keeping shader complexity at a manageable level but at the cost of additional draw calls to render the decals.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-15T18:11:49-07:00">
+    <meta property="article:modified_time" content="2024-07-15T18:11:49-07:00">
+    <meta property="article:tag" content="Rendering">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Decals">
+  <meta name="twitter:description" content="Tempest GBuffer How They Work Sampling Stencil Sort Order Batch Rendering GBuffer Modidfication Unique Applications Performance There are a couple of different ways to implement decals, each with their pros and cons. For this post I’ll go over how Tempest implements screen space deferred decals to modify the gbuffer in various ways. Decals tend to offer very easy ways to modify the scene while keeping shader complexity at a manageable level but at the cost of additional draw calls to render the decals.">
+<title>Decals</title>
+<link rel="stylesheet dns-prefetch preconnect preload prefetch" as="style" href="https://yggdrasil-917.github.io/css/style.min.53a53ff9a700cf26a907d20cff4ca6268650da3c0980ef01164d230678d732e7.css" integrity="sha256-U6U/+acAzyapB9IM/0ymJoZQ2jwJgO8BFk0jBnjXMuc=" crossorigin="anonymous">
+	</head>
+<body id="page">
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://yggdrasil-917.github.io/">Tempest Engine Dev</a>
+				</div>
+				<nav class="site-nav hide-in-mobile"><a href="https://yggdrasil-917.github.io/posts/">Posts</a><a href="https://yggdrasil-917.github.io/about">About</a></nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/yggdrasil-917" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="mailto:yggdrasil.917@gmail.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></span><button id="share-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></button>
+ 
+<div id="share-links" class="animated fast">
+    
+    
+    
+    
+    <ul>
+        <li>
+            <a href="https://twitter.com/intent/tweet?hashtags=hermit2&amp;url=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fdecals%2fdecals%2f&amp;text=Decals" target="_blank" rel="noopener" aria-label="Share on X"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="st0" d="m21.3 21.1 -11.4 -18.2h-7.2l11.4 18.2zm-18.6 0 7.2 -6.6m4.2 -5 7.2 -6.6"/></svg></a>
+        </li>
+        <li>
+            <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fdecals%2fdecals%2f" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        </li>
+        <li>
+            <a href="mailto:?subject=Decals&amp;body=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fdecals%2fdecals%2f" target="_self" rel="noopener" aria-label="Share on Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+        </li>
+        <li>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fdecals%2fdecals%2f&amp;source=https%3a%2f%2fyggdrasil-917.github.io%2f&amp;title=Decals&amp;summary=Decals%2c%20by%20%3cnil%3e%0a%0a%3cnil%3e%0a" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        </li>
+        <li>
+            <a href="#" onclick="linkShare(&#34;Decals&#34;,&#34;https://yggdrasil-917.github.io/posts/decals/decals/&#34;,&#34;Decals, by \u003cnil\u003e\n\n\u003cnil\u003e\n&#34;); return false;" target="_self" rel="noopener" aria-label="Copy Link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></a>
+        </li>
+    </ul>
+</div><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://yggdrasil-917.github.io/posts/">Posts</a></li>
+			<li><a href="https://yggdrasil-917.github.io/about">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster"><article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 15, 2024</span></div>
+				<h1>Decals</h1>
+			</header>
+			<div class="post-info"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg><a href="" target="_blank"></a></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://yggdrasil-917.github.io/tags/rendering">rendering</a></span></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+    
+    
+    
+    
+    8 Minutes, 21 Seconds</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-07-15 18:11 -0700</p></div>
+			<hr class="post-end">
+			<div class="content">
+				<ul>
+<li><a href="#tempest-gbuffer">Tempest GBuffer</a></li>
+<li><a href="#how-they-work">How They Work</a></li>
+<li><a href="#sampling-stencil">Sampling Stencil</a></li>
+<li><a href="#sort-order">Sort Order</a></li>
+<li><a href="#batch-rendering">Batch Rendering</a></li>
+<li><a href="#gbuffer-modifications">GBuffer Modidfication</a></li>
+<li><a href="#unique-applications">Unique Applications</a></li>
+<li><a href="#performance">Performance</a></li>
+</ul>
+<p>There are a couple of different ways to implement decals, each with their pros and cons. For this post I&rsquo;ll go over how Tempest implements screen space deferred decals to modify the gbuffer in various ways. Decals tend to offer very easy ways to modify the scene while keeping shader complexity at a manageable level but at the cost of additional draw calls to render the decals.</p>
+<h2 id="tempest-gbuffer">Tempest GBuffer<a href="#tempest-gbuffer" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Before going into details about the decal implementation, it is worth going over some of the details of Tempest&rsquo;s gbuffer layout.</p>
+<p><img src="/images/decals/GBufferLayout.png" alt="GBuffer Layout"></p>
+<p>There is also one additional render target that isn&rsquo;t technically part of the gbuffer but still very important to the final render. That is emission and GI which is stored in the render target that stores the final scene lighting. It&rsquo;s done this way so as to not have a dedicated render target for both emission and global illumination, in other words, a memory optimization.</p>
+<p>For anyone familiar with other gbuffer layouts, this shouldn&rsquo;t come as any surprise as it is very similar to a lot of other layouts out there so I&rsquo;ll only call out a few details about it. The gbuffer normals are stored in a two component render target. This is done by converting a typical world normal unit vector to a <a href="https://jcgt.org/published/0003/02/01/">octahedron encoding</a>. There are very fast ways to encode and decode using this method that it allowed the usage of a render target format that has a smaller bandwidth than other formats without encoding. This is one area where I feel like every deferred renderer solves the storage of normal vectors differently. For instance, another popular solution is to use no encoding and have a render target format of RGB10A2 so it adds up to 32 bits per fragment, the same as the format Tempest uses for world normals. I found that using octahedron encoding and 16 bits per channel yielded slightly better results than the latter option but again the differences are minimal. The other thing to expand upon is what exactly is stored in the last gbuffer render target. The alpha channel of GBuffer2 stores the id of what BRDF is to be used for that fragment during lighting and GBuffer3 stores any data needed to accomplish that. One example of data stored in GBuffer3 is subsurface color and its intensity used for foliage lighting.</p>
+<h2 id="how-they-work">How They Work<a href="#how-they-work" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>These decals modify gbuffer content and as such they are rendered right after the gbuffer pass is done. All the decals use the same underlying mesh, a unit cube centered around the origin. The depth test and depth writing is turned off when drawing a decal. This is largely done as the shader needs to sample the depth texture and the stencil values. Unfortunately it isn&rsquo;t possible to bind the depth texture in read only mode and sample it in the shader as otherwise the DirectX debug layer screams at you. You can of course copy the depth texture and get around it that way but there aren&rsquo;t enough reasons to copy the depth texture at the moment so it isn&rsquo;t worth paying the performance cost to copy the depth texture. The last render state to configure before drawing the decal is the blend mode to use. What blend mode to use depends on what type of information is being modified and will discussed in more detail later in this post.</p>
+<p>With drawing a cube to represent the volume of the decal we also need to somehow carve out the correct shape of the decal based on the geometry the decal is projecting onto. Luckily we can do that with the depth texture and a little bit of math. We can compute the fragment&rsquo;s world position using the depth texture and then we can transform that to the decal&rsquo;s local space. Once we have that we can do a simple box bounds check to determine if the fragment is actually part of the decal or not.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hlsl" data-lang="hlsl"><span class="line"><span class="cl"><span class="c1">// Bounds check in decal&#39;s local space to discard fragments that</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// are not part of the decal. This is where the fact we use a</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// unit cube for the volume comes into play.</span>
+</span></span><span class="line"><span class="cl"><span class="nb">clip</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">decalPosOS</span><span class="p">));</span>
+</span></span></code></pre></div><p>At this point we have the decal&rsquo;s shape and we can now compute the texture coordinates using the decal position in object space so we can sample any textures the decal will use.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hlsl" data-lang="hlsl"><span class="line"><span class="cl"><span class="c1">// decalPosOS is in the [-0.5, 0.5] range so remap it to [0, 1] and then we can do the usual </span>
+</span></span><span class="line"><span class="cl"><span class="c1">// UV scale and offset transform for any sort of tiling support.</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float2</span> <span class="n">decalUV</span> <span class="o">=</span> <span class="p">(</span><span class="n">decalPosOS</span><span class="p">.</span><span class="n">xz</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">g_Material</span><span class="p">.</span><span class="n">scaleAndOffset</span><span class="p">.</span><span class="n">xy</span> <span class="o">+</span> <span class="n">g_Material</span><span class="p">.</span><span class="n">scaleAndOffset</span><span class="p">.</span><span class="n">zw</span><span class="p">;</span>
+</span></span></code></pre></div><h2 id="sampling-stencil">Sampling Stencil<a href="#sampling-stencil" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>It&rsquo;s pretty rare to find any information about sampling the depth texture and getting the stencil value from it. Most of the time you will have the hardware do the stencil test so you don&rsquo;t have to worry about handling the stencil values directly but there are times where you have to. This is one such time as we are not doing depth testing when rendering the decal for reasons outlined previously. In order to do this we have to properly setup the shader resource view for the depth texture so that we can access the stencil value. Tempest uses a <strong>D24S8</strong> format and that means we need to use <strong>DXGI_FORMAT_X24_TYPELESS_G8_UINT</strong> when setting up the resource view. Then we can sample the depth texture like the sample below in order to get the stencil value for any given fragment.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hlsl" data-lang="hlsl"><span class="line"><span class="cl"><span class="kt">Texture2D</span><span class="o">&lt;</span><span class="kt">uint2</span><span class="o">&gt;</span> <span class="n">SceneStencil</span> <span class="o">:</span> <span class="k">register</span><span class="p">(...);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Check if we can project on this fragment based on the stencil value</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="kt">uint</span> <span class="n">projectionMask</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span><span class="n">g_Material</span><span class="p">.</span><span class="n">buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="kt">uint</span> <span class="n">receiveDecal</span> <span class="o">=</span> <span class="p">(</span><span class="n">SceneStencil</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="kt">uint3</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">screenPos</span><span class="p">.</span><span class="n">xy</span><span class="p">,</span> <span class="mo">0</span><span class="p">)).</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="n">STENCIL_RECEIVE_DECALS_BIT</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">((</span><span class="n">projectionMask</span> <span class="o">&amp;</span> <span class="n">receiveDecal</span><span class="p">)</span> <span class="o">==</span> <span class="mo">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">clip</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>With the ability to sample the stencil value in the shader we can now exclude specific models from receiving decals. There are times where we may have moving models that intersect the decal volume but we don&rsquo;t want them to receive any of the decal projection. The way Tempest handles this is to use 3 bits from the stencil buffer to create decal channels. With 3 bits we have 3 channels to use and with a little bit manipulation we can check for overlapping channels and decide if a fragment receives the decal being projected.</p>
+<h2 id="sort-order">Sort Order<a href="#sort-order" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>If you have mutiple overlapping decals, the renderer should have a way to determine the blend order. How this is achieved is sort of engine specific but there&rsquo;s often some underlying sorting system for generating the order of draw calls. Then using a sort bias you can change the priority of how the decal is rendered. Without getting into details as that topic is out of scope for this post, this is what Tempest ends up doing. Tempest has support for generating a sort key based on various parameters and using that for sorting. The decals have a sort order they can specify that will end up modifying the generated sort key value and in effect changes the sorting results. The higher the sort order value the later the decal is rendered.</p>
+<p>In the image below, there are two overlapping decals. On the left half both have the same sort order and on the right half the red tinted decal has a higher sort order so it gets rendered on top of the other decal.</p>
+<p><img src="/images/decals/DecalOverlapMerged.png" alt="Sort Order"></p>
+<h2 id="batch-rendering">Batch Rendering<a href="#batch-rendering" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>It is very easy to get into a situation where you have a lot of decals being rendered and while each individual decal is fast to render it adds up quickly. Tempest has a batch rendering solution used by all models it renders except in a few specific cases. This made decals use this system without doing any extra work and so any decal using the same material will be instanced. There are some unique cases that need to be handled for decals to support all the desired features. For example, using the sort order mentioned above can break batching but the flexibility it provides outweighs the costs.</p>
+<h2 id="gbuffer-modifications">GBuffer Modifications<a href="#gbuffer-modifications" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>The decal&rsquo;s shader can modify any property of the gbuffer in its draw call. All gbuffer render targets are bound during the decal&rsquo;s draw call as it was decided to have one decal shader instead of having lots of permutations that only write to the properties it is configured to change. All render targets have the typical transparency blend mode except for the emission output which uses an additive one.</p>
+<p>Here is an example of a decal that changes the emissive values. Tempest supports a screen space global illumination pass which ends up picking up the emission changes as well as you can see the bounced lighting on the wall.</p>
+<p><img src="/images/decals/DecalEmissive.png" alt="Decal Emissive"></p>
+<p>Here is another example that blends the normal stored in the gbuffer normal. This one however, isn&rsquo;t entirely accurate as the blending is being done between encoded values where as it should be done with the decoded values before encoding back to the octahedron format. That would require copying the gbuffer normals into another texture and just isn&rsquo;t worth it. The blending strength can be adjusted until you get something good enough and so far has worked well enough.</p>
+<p><img src="/images/decals/DecalNormal.png" alt="Decal Normal"></p>
+<h2 id="unique-applications">Unique Applications<a href="#unique-applications" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Using a lot of this foundation to render a screen space decal you can also extend this system to handle a few extra situations. One such example is a cheap omni light source without actually using a point light and going through the PBR pipeline. These decals do just about everything the typical decal does however you do not have to do the local space box bounds check to create the decal shape. In the case of the omni light you can use a circle gradient function that is tinted by a user specified color and intensity. The size of it is determined by the size of the decal itself and the result is added to the emission values.</p>
+<p>Here is an example of an omni light that is tinted red.</p>
+<p><img src="/images/decals/DecalOmniLight.png" alt="Decal OmniLight"></p>
+<p>You can apply essentially the same ideas as the omni light decal but for ambient occlusion stored in the gbuffer. Using the same circle gradient function you can modulate the AO but you must make sure to have a blend mode that modulates the results for this to work.</p>
+<h2 id="performance">Performance<a href="#performance" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Performance for screen space decals will be determined by the complexity of the shader and how big the decal volume is. Overlapping decals will have a negative effect to overall performance as you are re-evaluating fragments. That said decals can be rendered very fast and making good use of the batching system also helps a lot. Some benchmarks done with RenderDoc have shown the decals in Tempest to take around 10 - 20 microseconds for each decal draw call so it&rsquo;s pretty fast. The omni light and AO decals will be a bit more expensive but not by much if there size is comparable to other decals.</p>
+
+			</div>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://yggdrasil-917.github.io/posts/scripting-with-cpp/scripting-with-cpp/">
+				<span class="post-nav-label">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Scripting With Cpp</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+<script src="https://utteranc.es/client.js"
+        repo="yggdrasil-917/yggdrasil-917.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</div>
+	</main>
+
+<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+	<p>
+		&copy; 2024 <a href="https://yggdrasil-917.github.io/"></a>
+		&#183; XGH
+		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a></p>
+
+</footer>
+<script async src="https://yggdrasil-917.github.io/js/bundle.min.c7c384e4d29d192bbac6811ae4660bb01767194a5bea56baca77e8260f93ea16.js" integrity="sha256-x8OE5NKdGSu6xoEa5GYLsBdnGUpb6la6ynfoJg+T6hY=" crossorigin="anonymous"></script><script async src="https://yggdrasil-917.github.io/js/link-share.min.24409a4f6e5537d70ffc55ec8f9192208d718678cb8638585342423020b37f39.js" integrity="sha256-JECaT25VN9cP/FXsj5GSII1xhnjLhjhYU0JCMCCzfzk=" crossorigin="anonymous"></script>
+</body>
+
+</html>
