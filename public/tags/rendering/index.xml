@@ -6,8 +6,15 @@
     <description>Recent content in Rendering on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jul 2024 18:11:49 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2024 08:54:06 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/rendering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tempest Gpu Frame</title>
+      <link>https://yggdrasil-917.github.io/posts/tempest-gpu-frame/tempest-gpu-frame/</link>
+      <pubDate>Sun, 21 Jul 2024 08:54:06 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/tempest-gpu-frame/tempest-gpu-frame/</guid>
+      <description>Shadows Phase Depth Phase PreLighting Phase Lighting Phase ImGui Phase This post will go over one of the rendering test scenes and we&amp;rsquo;ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.</description>
+    </item>
     <item>
       <title>Decals</title>
       <link>https://yggdrasil-917.github.io/posts/decals/decals/</link>
