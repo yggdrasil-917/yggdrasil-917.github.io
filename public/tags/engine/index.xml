@@ -6,8 +6,15 @@
     <description>Recent content in Engine on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jul 2024 11:57:54 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jul 2024 20:30:08 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/engine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tempest Engine Loop</title>
+      <link>https://yggdrasil-917.github.io/posts/tempest-engine-loop/tempest-engine-loop/</link>
+      <pubDate>Wed, 24 Jul 2024 20:30:08 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/tempest-engine-loop/tempest-engine-loop/</guid>
+      <description>The previous post did an in-depth look into how a Tempest frame is put together on the GPU. In this post I would like to do the same but looking at things from the CPU side. Essentially we will dive into what the engine loop does to create a brand new frame.&#xA;This time around we will look at a new scene in the middle of a combat scenario playing out as more things will happen on the CPU than the rendering test scene we looked at previously.</description>
+    </item>
     <item>
       <title>Scripting With Cpp</title>
       <link>https://yggdrasil-917.github.io/posts/scripting-with-cpp/scripting-with-cpp/</link>
