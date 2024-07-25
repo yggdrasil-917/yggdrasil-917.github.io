@@ -5,7 +5,7 @@
 		<description>Recent content in Posts on Tempest Engine Dev</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>en-us</language>
-		<lastBuildDate>Sun, 21 Jul 2024 08:54:06 -0700</lastBuildDate>
+		<lastBuildDate>Mon, 22 Jul 2024 17:30:08 -0700</lastBuildDate>
 		<atom:link href="https://yggdrasil-917.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
@@ -21,6 +21,7 @@
 <li><a href="#prelighting-phase">PreLighting Phase</a></li>
 <li><a href="#lighting-phase">Lighting Phase</a></li>
 <li><a href="#imgui-phase">ImGui Phase</a></li>
+<li><a href="#nvidia-nsight-preview">NVidia NSight Preview</a></li>
 </ul>
 <p><img src="/images/tempest-gpu-frame/TestScene.png" alt="Test Scene" title="Test Scene"></p>
 <p>This post will go over one of the rendering test scenes and we&rsquo;ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.</p>
@@ -122,6 +123,10 @@
 <h2 id="imgui-phase">ImGui Phase</h2>
 <p>This phase will only run in the editor. After the scene rendering is done, the editor will render all the UI elements for the editor. The texture containing the scene lighting will also get rendered as a ImGui image. The aspect ratio of that scene rendering is optionally preserved so the user can choose to have the image take up all available space or just enough to maintain its aspect ratio.</p>
 <p>All of this and more things that I didn&rsquo;t mention was able to be done in a laptop using a NVidia 2060 rendering the scene at 1440p while the editor rendered on a ultra wide screen monitor and it took around 19 milliseconds. The bottleneck being heavily skewed towards all the fullscreen effects like SSR and SSGI. That said a 2060 isn&rsquo;t really suited to render a PBR frame at 1440p 60 frames per second. All things considered I&rsquo;m especially happy with the performance considering there are still things to do to optimize the engine that will eventually be done.</p>
+<h2 id="nvidia-nsight-preview">NVidia NSight Preview</h2>
+<p>I&rsquo;ll briefly preview what a GPU trace of the same scene running in the player looks like. I intend on making a post on performance and profiling which is where I will go into more details. For now I just want to show what an external tool like NVidia&rsquo;s NSight has to say about the renderer. I suggest opening the image in a new tab so you can see more details. I&rsquo;ll reiterate that this is running on a laptop with a 2060 GPU and rendering the scene at 2560x1440 with a target framerate of 60Hz. As the image shows though, the frame took a little over 17ms to render which means dynamic resolution would kick in had it not been disabled for the capture. That said most of the rendering passes are configured to use their highest quality and there is room for improvement too but that&rsquo;s a problem for a later time.</p>
+<p><img src="/images/tempest-gpu-frame/NSightGpuTrace.png" alt="NSight GPU Trace" title="NSight GPU Trace"></p>
+<p>One important take away from the capture is that the GPU is always active throughout the frame as you can see from the <strong>GPU Active</strong> counter. That tends to rule out the renderer doing anything obviously bad for performance. Another cool thing is that you can see the red boxes at the top middle of the image regarding the <strong>GPU context</strong> tracker. Those red boxes denote external processes running on the machine that interrupts your application. Those interruptions will inflate your application&rsquo;s framerate and knowing that happened in a capture will let you understand potential performance spikes in the frame. Loads of other useful info on the capture but that might be covered at a future time.</p>
 ]]></content>
 		</item>
 		

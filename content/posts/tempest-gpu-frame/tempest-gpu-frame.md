@@ -15,6 +15,7 @@ tags:
 * [PreLighting Phase](#prelighting-phase)
 * [Lighting Phase](#lighting-phase)
 * [ImGui Phase](#imgui-phase)
+* [NVidia NSight Preview](#nvidia-nsight-preview)
 
 ![Test Scene](/images/tempest-gpu-frame/TestScene.png "Test Scene")
 
@@ -165,3 +166,10 @@ The in-game UI solves the age old problem of rendering many quads in a efficient
 This phase will only run in the editor. After the scene rendering is done, the editor will render all the UI elements for the editor. The texture containing the scene lighting will also get rendered as a ImGui image. The aspect ratio of that scene rendering is optionally preserved so the user can choose to have the image take up all available space or just enough to maintain its aspect ratio.
 
 All of this and more things that I didn't mention was able to be done in a laptop using a NVidia 2060 rendering the scene at 1440p while the editor rendered on a ultra wide screen monitor and it took around 19 milliseconds. The bottleneck being heavily skewed towards all the fullscreen effects like SSR and SSGI. That said a 2060 isn't really suited to render a PBR frame at 1440p 60 frames per second. All things considered I'm especially happy with the performance considering there are still things to do to optimize the engine that will eventually be done.
+
+## NVidia NSight Preview
+I'll briefly preview what a GPU trace of the same scene running in the player looks like. I intend on making a post on performance and profiling which is where I will go into more details. For now I just want to show what an external tool like NVidia's NSight has to say about the renderer. I suggest opening the image in a new tab so you can see more details. I'll reiterate that this is running on a laptop with a 2060 GPU and rendering the scene at 2560x1440 with a target framerate of 60Hz. As the image shows though, the frame took a little over 17ms to render which means dynamic resolution would kick in had it not been disabled for the capture. That said most of the rendering passes are configured to use their highest quality and there is room for improvement too but that's a problem for a later time.
+
+![NSight GPU Trace](/images/tempest-gpu-frame/NSightGpuTrace.png "NSight GPU Trace")
+
+One important take away from the capture is that the GPU is always active throughout the frame as you can see from the **GPU Active** counter. That tends to rule out the renderer doing anything obviously bad for performance. Another cool thing is that you can see the red boxes at the top middle of the image regarding the **GPU context** tracker. Those red boxes denote external processes running on the machine that interrupts your application. Those interruptions will inflate your application's framerate and knowing that happened in a capture will let you understand potential performance spikes in the frame. Loads of other useful info on the capture but that might be covered at a future time.

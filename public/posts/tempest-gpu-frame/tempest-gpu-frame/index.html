@@ -16,14 +16,14 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#494f5c"><meta name="author" content="">
 
   <meta itemprop="name" content="Tempest Gpu Frame">
-  <meta itemprop="description" content="Shadows Phase Depth Phase PreLighting Phase Lighting Phase ImGui Phase This post will go over one of the rendering test scenes and we’ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.">
+  <meta itemprop="description" content="Shadows Phase Depth Phase PreLighting Phase Lighting Phase ImGui Phase NVidia NSight Preview This post will go over one of the rendering test scenes and we’ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.">
   <meta itemprop="datePublished" content="2024-07-21T08:54:06-07:00">
   <meta itemprop="dateModified" content="2024-07-21T08:54:06-07:00">
-  <meta itemprop="wordCount" content="3328">
+  <meta itemprop="wordCount" content="3605">
   <meta itemprop="keywords" content="Rendering,Editor"><meta property="og:url" content="https://yggdrasil-917.github.io/posts/tempest-gpu-frame/tempest-gpu-frame/">
   <meta property="og:site_name" content="Tempest Engine Dev">
   <meta property="og:title" content="Tempest Gpu Frame">
-  <meta property="og:description" content="Shadows Phase Depth Phase PreLighting Phase Lighting Phase ImGui Phase This post will go over one of the rendering test scenes and we’ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.">
+  <meta property="og:description" content="Shadows Phase Depth Phase PreLighting Phase Lighting Phase ImGui Phase NVidia NSight Preview This post will go over one of the rendering test scenes and we’ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -34,7 +34,7 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Tempest Gpu Frame">
-  <meta name="twitter:description" content="Shadows Phase Depth Phase PreLighting Phase Lighting Phase ImGui Phase This post will go over one of the rendering test scenes and we’ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.">
+  <meta name="twitter:description" content="Shadows Phase Depth Phase PreLighting Phase Lighting Phase ImGui Phase NVidia NSight Preview This post will go over one of the rendering test scenes and we’ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.">
 <title>Tempest Gpu Frame</title>
 <link rel="stylesheet dns-prefetch preconnect preload prefetch" as="style" href="https://yggdrasil-917.github.io/css/style.min.53a53ff9a700cf26a907d20cff4ca6268650da3c0980ef01164d230678d732e7.css" integrity="sha256-U6U/+acAzyapB9IM/0ymJoZQ2jwJgO8BFk0jBnjXMuc=" crossorigin="anonymous">
 	</head>
@@ -96,7 +96,7 @@
     
     
     
-    15 Minutes, 7 Seconds</p>
+    16 Minutes, 23 Seconds</p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-07-21 08:54 -0700</p></div>
 			<hr class="post-end">
 			<div class="content">
@@ -106,6 +106,7 @@
 <li><a href="#prelighting-phase">PreLighting Phase</a></li>
 <li><a href="#lighting-phase">Lighting Phase</a></li>
 <li><a href="#imgui-phase">ImGui Phase</a></li>
+<li><a href="#nvidia-nsight-preview">NVidia NSight Preview</a></li>
 </ul>
 <p><img src="/images/tempest-gpu-frame/TestScene.png" alt="Test Scene" title="Test Scene"></p>
 <p>This post will go over one of the rendering test scenes and we&rsquo;ll see the steps the Tempest engine takes on the GPU to render a frame. The engine has its own editor separate from the player executable, which is what is shipped to people. The editor does pretty much the same thing the player does plus a few editor only rendering tasks so the scene we will analyze is actually running in the editor.</p>
@@ -207,6 +208,10 @@
 <h2 id="imgui-phase">ImGui Phase<a href="#imgui-phase" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p>This phase will only run in the editor. After the scene rendering is done, the editor will render all the UI elements for the editor. The texture containing the scene lighting will also get rendered as a ImGui image. The aspect ratio of that scene rendering is optionally preserved so the user can choose to have the image take up all available space or just enough to maintain its aspect ratio.</p>
 <p>All of this and more things that I didn&rsquo;t mention was able to be done in a laptop using a NVidia 2060 rendering the scene at 1440p while the editor rendered on a ultra wide screen monitor and it took around 19 milliseconds. The bottleneck being heavily skewed towards all the fullscreen effects like SSR and SSGI. That said a 2060 isn&rsquo;t really suited to render a PBR frame at 1440p 60 frames per second. All things considered I&rsquo;m especially happy with the performance considering there are still things to do to optimize the engine that will eventually be done.</p>
+<h2 id="nvidia-nsight-preview">NVidia NSight Preview<a href="#nvidia-nsight-preview" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>I&rsquo;ll briefly preview what a GPU trace of the same scene running in the player looks like. I intend on making a post on performance and profiling which is where I will go into more details. For now I just want to show what an external tool like NVidia&rsquo;s NSight has to say about the renderer. I suggest opening the image in a new tab so you can see more details. I&rsquo;ll reiterate that this is running on a laptop with a 2060 GPU and rendering the scene at 2560x1440 with a target framerate of 60Hz. As the image shows though, the frame took a little over 17ms to render which means dynamic resolution would kick in had it not been disabled for the capture. That said most of the rendering passes are configured to use their highest quality and there is room for improvement too but that&rsquo;s a problem for a later time.</p>
+<p><img src="/images/tempest-gpu-frame/NSightGpuTrace.png" alt="NSight GPU Trace" title="NSight GPU Trace"></p>
+<p>One important take away from the capture is that the GPU is always active throughout the frame as you can see from the <strong>GPU Active</strong> counter. That tends to rule out the renderer doing anything obviously bad for performance. Another cool thing is that you can see the red boxes at the top middle of the image regarding the <strong>GPU context</strong> tracker. Those red boxes denote external processes running on the machine that interrupts your application. Those interruptions will inflate your application&rsquo;s framerate and knowing that happened in a capture will let you understand potential performance spikes in the frame. Loads of other useful info on the capture but that might be covered at a future time.</p>
 
 			</div>
 		</article>
@@ -232,7 +237,8 @@
 		&copy; 2024 <a href="https://yggdrasil-917.github.io/"></a>
 		&#183; XGH
 		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
-		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a></p>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
+		&#183; <a href="https://yggdrasil-917.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
 
 </footer>
 <script async src="https://yggdrasil-917.github.io/js/bundle.min.c7c384e4d29d192bbac6811ae4660bb01767194a5bea56baca77e8260f93ea16.js" integrity="sha256-x8OE5NKdGSu6xoEa5GYLsBdnGUpb6la6ynfoJg+T6hY=" crossorigin="anonymous"></script><script async src="https://yggdrasil-917.github.io/js/link-share.min.24409a4f6e5537d70ffc55ec8f9192208d718678cb8638585342423020b37f39.js" integrity="sha256-JECaT25VN9cP/FXsj5GSII1xhnjLhjhYU0JCMCCzfzk=" crossorigin="anonymous"></script>
