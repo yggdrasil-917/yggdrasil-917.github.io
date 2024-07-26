@@ -6,8 +6,15 @@
     <description>Recent content on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Jul 2024 20:30:08 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jul 2024 11:20:44 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interlaced Rendering</title>
+      <link>https://yggdrasil-917.github.io/posts/interlaced-rendering/interlaced-rendering/</link>
+      <pubDate>Fri, 26 Jul 2024 11:20:44 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/interlaced-rendering/interlaced-rendering/</guid>
+      <description>What Is It Why Use It Implementation Deinterlacing Performance Final Thoughts What Is It A more common name might be interlaced video. The idea originates decades ago in the TV industry where companies wanted to save on bandwidth. To quote Wikipedia, the interlaced signal contains two images of a video frame captured consecutively which enhances motion perception to the viewer, and reduces flicker by taking advantage of the characteristics of the human visual system.</description>
+    </item>
     <item>
       <title>Tempest Engine Loop</title>
       <link>https://yggdrasil-917.github.io/posts/tempest-engine-loop/tempest-engine-loop/</link>

@@ -1,0 +1,182 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge"><meta name="robots" content="index, follow">
+<meta name="revisit-after" content="15 days"><link rel="author" href="/humans.txt">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#494f5c">
+<meta name="msapplication-TileColor" content="#494f5c">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#494f5c"><meta name="author" content="">
+
+  <meta itemprop="name" content="Interlaced Rendering">
+  <meta itemprop="description" content="What Is It Why Use It Implementation Deinterlacing Performance Final Thoughts What Is It A more common name might be interlaced video. The idea originates decades ago in the TV industry where companies wanted to save on bandwidth. To quote Wikipedia, the interlaced signal contains two images of a video frame captured consecutively which enhances motion perception to the viewer, and reduces flicker by taking advantage of the characteristics of the human visual system.">
+  <meta itemprop="datePublished" content="2024-07-26T11:20:44-07:00">
+  <meta itemprop="dateModified" content="2024-07-26T11:20:44-07:00">
+  <meta itemprop="wordCount" content="1708">
+  <meta itemprop="keywords" content="Rendering"><meta property="og:url" content="https://yggdrasil-917.github.io/posts/interlaced-rendering/interlaced-rendering/">
+  <meta property="og:site_name" content="Tempest Engine Dev">
+  <meta property="og:title" content="Interlaced Rendering">
+  <meta property="og:description" content="What Is It Why Use It Implementation Deinterlacing Performance Final Thoughts What Is It A more common name might be interlaced video. The idea originates decades ago in the TV industry where companies wanted to save on bandwidth. To quote Wikipedia, the interlaced signal contains two images of a video frame captured consecutively which enhances motion perception to the viewer, and reduces flicker by taking advantage of the characteristics of the human visual system.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-07-26T11:20:44-07:00">
+    <meta property="article:modified_time" content="2024-07-26T11:20:44-07:00">
+    <meta property="article:tag" content="Rendering">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Interlaced Rendering">
+  <meta name="twitter:description" content="What Is It Why Use It Implementation Deinterlacing Performance Final Thoughts What Is It A more common name might be interlaced video. The idea originates decades ago in the TV industry where companies wanted to save on bandwidth. To quote Wikipedia, the interlaced signal contains two images of a video frame captured consecutively which enhances motion perception to the viewer, and reduces flicker by taking advantage of the characteristics of the human visual system.">
+<title>Interlaced Rendering</title>
+<link rel="stylesheet dns-prefetch preconnect preload prefetch" as="style" href="https://yggdrasil-917.github.io/css/style.min.53a53ff9a700cf26a907d20cff4ca6268650da3c0980ef01164d230678d732e7.css" integrity="sha256-U6U/+acAzyapB9IM/0ymJoZQ2jwJgO8BFk0jBnjXMuc=" crossorigin="anonymous">
+	</head>
+<body id="page">
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://yggdrasil-917.github.io/">Tempest Engine Dev</a>
+				</div>
+				<nav class="site-nav hide-in-mobile"><a href="https://yggdrasil-917.github.io/posts/">Posts</a><a href="https://yggdrasil-917.github.io/about">About</a></nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/yggdrasil-917" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="mailto:yggdrasil.917@gmail.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></span><button id="share-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></button>
+ 
+<div id="share-links" class="animated fast">
+    
+    
+    
+    
+    <ul>
+        <li>
+            <a href="https://twitter.com/intent/tweet?hashtags=hermit2&amp;url=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2finterlaced-rendering%2finterlaced-rendering%2f&amp;text=Interlaced%20Rendering" target="_blank" rel="noopener" aria-label="Share on X"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="st0" d="m21.3 21.1 -11.4 -18.2h-7.2l11.4 18.2zm-18.6 0 7.2 -6.6m4.2 -5 7.2 -6.6"/></svg></a>
+        </li>
+        <li>
+            <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2finterlaced-rendering%2finterlaced-rendering%2f" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        </li>
+        <li>
+            <a href="mailto:?subject=Interlaced%20Rendering&amp;body=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2finterlaced-rendering%2finterlaced-rendering%2f" target="_self" rel="noopener" aria-label="Share on Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+        </li>
+        <li>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2finterlaced-rendering%2finterlaced-rendering%2f&amp;source=https%3a%2f%2fyggdrasil-917.github.io%2f&amp;title=Interlaced%20Rendering&amp;summary=Interlaced%20Rendering%2c%20by%20%3cnil%3e%0a%0a%3cnil%3e%0a" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        </li>
+        <li>
+            <a href="#" onclick="linkShare(&#34;Interlaced Rendering&#34;,&#34;https://yggdrasil-917.github.io/posts/interlaced-rendering/interlaced-rendering/&#34;,&#34;Interlaced Rendering, by \u003cnil\u003e\n\n\u003cnil\u003e\n&#34;); return false;" target="_self" rel="noopener" aria-label="Copy Link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></a>
+        </li>
+    </ul>
+</div><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://yggdrasil-917.github.io/posts/">Posts</a></li>
+			<li><a href="https://yggdrasil-917.github.io/about">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster"><article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 26, 2024</span></div>
+				<h1>Interlaced Rendering</h1>
+			</header>
+			<div class="post-info"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg><a href="" target="_blank"></a></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://yggdrasil-917.github.io/tags/rendering">rendering</a></span></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+    
+    
+    
+    
+    7 Minutes, 45 Seconds</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-07-26 11:20 -0700</p></div>
+			<hr class="post-end">
+			<div class="content">
+				<ul>
+<li><a href="#what-is-it">What Is It</a></li>
+<li><a href="#why-use-it">Why Use It</a></li>
+<li><a href="#implementation">Implementation</a></li>
+<li><a href="#deinterlacing">Deinterlacing</a></li>
+<li><a href="#performance">Performance</a></li>
+<li><a href="#final-thoughts">Final Thoughts</a></li>
+</ul>
+<h2 id="what-is-it">What Is It<a href="#what-is-it" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>A more common name might be interlaced video. The idea originates decades ago in the TV industry where companies wanted to save on bandwidth. To quote Wikipedia, the interlaced signal contains two images of a video frame captured consecutively which enhances motion perception to the viewer, and reduces flicker by taking advantage of the characteristics of the human visual system. In other words, the images are rendered at half resolution in either the vertical or horizontal axis. Then the current image and the previous image are combined to reconstruct a new image that has twice the resolution of the individual images. <a href="https://en.wikipedia.org/wiki/Interlaced_video">Here</a> is a nice gif animating the process of interlacing two video fields to construct a higher quality image.</p>
+<h2 id="why-use-it">Why Use It<a href="#why-use-it" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>In realtime rendering, we can use the same idea as interlaced video to reap similar benefits. Assuming your overall performance is GPU bound then using lower bandwidth will yield better performance. Since Tempest uses a deferred renderer, being GPU bound is a common occurrence so implementing interlaced rendering will generally have a positive effect on performance. Using interlaced rendering implies using lower resolution render targets when rendering the 3D world. Any computationally intensive rendering passes will benefit from a lower resolution output. So adopting interlaced rendering can introduce performance benefits in various areas of the pipeline.</p>
+<p>So if it can have these benefits then why aren&rsquo;t more engines using this type of rendering? Reconstructing the final image from two lower resolution images does introduce some rendering artifacts, especially when things are moving fast. The screenshot below shows an example of interlace artifacts after image reconstruction. The image is zoomed in to make the issue obvious and during normal gameplay it often doesn&rsquo;t stand out unless you know where to look. If you&rsquo;ve never seen it, I recommend looking at the <a href="https://www.slideshare.net/slideshow/dynamic-resolution-and-interlaced-rendering/253712465#68">presentation</a> that goes over interlaced rendering, which is also where the image below is from.</p>
+<p><img src="/images/interlaced-rendering/InterlacedArtifacts.png" alt="Interlaced Artifacts" title="Interlaced Artifacts"></p>
+<p>Other non-temporal based image reconstruction techniques suffer from similar issues. If you&rsquo;re familiar with <a href="https://pixiogaming.com/blogs/latest/checkerboard-rendering-an-ingenious-approach-to-4k-gaming">Checkerboard Rendering</a> techniques that were used when the PS4 Pro was released then you will know what I&rsquo;m talking about. Eventually advanced spatio-temporal upscalers got good enough to replace interlaced and checkerboard rendering solutions and the industry hasn&rsquo;t really looked back.</p>
+<h2 id="implementation">Implementation<a href="#implementation" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>In Tempest, the goal is to not use any temporal upscaler or TAA solution to construct the final image. This is only for stylistic reasons as I personally miss the sharp look frames used to have before these temporal solutions became ubiquitous. For this reason SMAA is the anti-aliasing technique of choice in Tempest. That said the engine does support FSR2 but it is mostly meant for comparing its results with other techniques in the engine. If by the end of the game&rsquo;s dev cycle the FSR solution is still working correctly then it might be available for users to enable through the graphics settings but the focus is to not rely on these techniques as much as possible.</p>
+<p>Before going into the implementation details of interlaced rendering I&rsquo;ve added a gif below of the rendering test scene. It has two numbered frames 1 and 2, respectively. One frame is rendered using the normal progressive solution and the other frame uses interlaced rendering to construct the final image using the current and previous frame. Do you think you can spot which frame is using interlaced rendering?</p>
+<p><img src="/images/interlaced-rendering/InterlacedRenderingComparison.gif" alt="Interlaced Comparison" title="Interlaced Comparison"></p>
+<p>If you look at the two frames carefully then you will likely be able to tell which frame is using interlaced rendering. However, while playing the game you&rsquo;re likely not thinking about that though so you won&rsquo;t even notice the artifacts most of the time. Without further ado the frame using interlaced rendering is the one marked as number one.</p>
+<p>Since most rendering resolutions used today are widescreen, the interlaced rendering solution will halve the width of the render targets as that will yield the best performance. The solution could be extended to halve vertical or horizontal resolution based on the aspect ratio but to keep things simple it will always halve the horizontal resolution. So for example, if the selected rendering resolution is 2560x1440 then the render targets used for the 3D environment will be set to 1280x1440.</p>
+<h3 id="deinterlacing">Deinterlacing<a href="#deinterlacing" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>After all the geometry has been rendered, a deinterlace pass runs to reconstruct the image to the selected rendering resolution. In the example above, this would mean deinterlacing into a render target with the resolution of 2560x1440. The image is not yet presented to the backbuffer but instead now is when all fullscreen effects will run and the pipeline is the same as the normal progressive renderer. The presentation on interlaced rendering describes several different ways to deinterlace the image and I highly suggest you read the presentation for more details as I will only cover the deinterlace method used in Tempest.</p>
+<p>The chosen deinterlace method is referred to as &ldquo;Weave&rdquo; in the linked interlaced rendering presentation, of which you can see a slide from it below. The basic idea is to insert the pixel columns of the new image in between every column of the previous image at which point you end up with an image that is twice the width of the previous images.</p>
+<p><img src="/images/interlaced-rendering/WeaveSlide.png" alt="Weave Slide"></p>
+<p>Like the slide mentions, reconstructing static scenes works extremely well and most of the deinterlace methods described in the presentation are fast methods that can achieve that quality. Dynamic scenes can however, show artifacts as previously detailed in this post. In those cases a more expenside deinterlace method can minimize those issues. Such a method is the temporal deinterlaced method but supporting it requires keeping track of several additional render targets so memory and performance requirements are higher. Keeping with the theme of the Tempest engine, no temporal solution is used and I typically prefer simple solutions if the result is good enough.</p>
+<p>To perform the deinterlace pass, a fullscreen draw call with a custom fragment shader is used. The renderer does not explicitly store the previous frame&rsquo;s interlaced rendering results in order to keep VRAM usage as low as it can be while doing interlaced rendering. It does however, persistently store the result of the final scene color in a render target and this is what is used to represent the previous frame in the deinterlace pass. We can&rsquo;t read and write to it in the fragment shader so what the renderer does is setup hardware blending using the typical transparent blend mode. So for the fragments that do not need to be updated in the draw call will simply return a fully black pixel, including alpha set to 0. This will leave those fragments unmodified after the draw call and the fragments that need to be updated will simply sample the interlaced scene color render target and returns that value. Below is a code snippet detailing what the fragment shader function does. The final piece of the puzzle is to jitter the projection matrix every frame similar to what is done with TAA but only jittered horizontally in this case. Then we alternate updating the odd pixel columns on one frame and the even ones on the next frame so the entire reconstructed image is updated.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hlsl" data-lang="hlsl"><span class="line"><span class="cl"><span class="c1">// Deinterlace fragment shader</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float4</span> <span class="n">MainPS</span><span class="p">(</span><span class="k">in</span> <span class="kt">float4</span> <span class="n">i_position</span> <span class="o">:</span> <span class="nd">SV_Position</span><span class="p">,</span> <span class="kt">half2</span> <span class="n">i_texcoord</span> <span class="o">:</span> <span class="n">TEXCOORD0</span><span class="p">)</span> <span class="o">:</span> <span class="nd">SV_Target</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">float2</span> <span class="n">uv</span> <span class="o">=</span> <span class="n">i_texcoord</span> <span class="o">*</span> <span class="n">g_Data</span><span class="p">.</span><span class="n">viewportScale</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">float4</span> <span class="n">finalColor</span> <span class="o">=</span> <span class="kt">float4</span><span class="p">(</span><span class="mo">0</span><span class="p">,</span><span class="mo">0</span><span class="p">,</span><span class="mo">0</span><span class="p">,</span><span class="mo">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">pixelX</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span><span class="n">i_position</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">oddPixel</span> <span class="o">=</span> <span class="p">(</span><span class="n">pixelX</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">doOdd</span> <span class="o">=</span> <span class="n">g_Data</span><span class="p">.</span><span class="n">updateOddColumns</span> <span class="o">!=</span> <span class="mo">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">((</span><span class="n">oddPixel</span> <span class="o">&amp;&amp;</span> <span class="n">doOdd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  	<span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">oddPixel</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">doOdd</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">finalColor</span> <span class="o">=</span> <span class="n">SceneColor</span><span class="p">.</span><span class="n">SampleLevel</span><span class="p">(</span><span class="n">s_LinearClampSampler</span><span class="p">,</span> <span class="n">uv</span><span class="p">,</span> <span class="mo">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">finalColor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="performance">Performance<a href="#performance" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>The performance test was done with a rendering resolution of 2560x1440 so interlaced rendering uses a 1280x1440 resolution and it is running on a 2060 GPU. Using RenderDoc to time the GPU frame we can see that the rendering test scene can take around 10 - 11 milliseconds to render without interlaced rendering and can be as fast as 6 milliseconds to render with interlaced rendering. That is fairly close to a 2x speedup which is amazing considering that only the world is rendered using interlaced rendering while the rest of the pipeline uses the reconstructed image.</p>
+<p>It is also important to mention that this interlaced rendering implementation makes good use of the 2x2 warp that fragment shaders typically execute as. If you search for other implementations of interlaced rendering reveals variants that use the stencil buffer to disallow rendering into odd or even pixel columns during the world rendering and then they complain about no performance improvements. This is absolutely not the way to implement interlaced rendering and should be avoided in favor of something like what this post has outlined.</p>
+<h2 id="final-thoughts">Final Thoughts<a href="#final-thoughts" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Interlaced rendering has so far provided many benefits to both runtime performance and memory usage while only introducing a handful of rendering artifacts. It seems to be really useful for the kind of game being made with Tempest where the camera is setup to offer a bird&rsquo;s eye view of the map. For games that require the camera to be up close to the environment may have some difficulties preserving model silhouettes with interlaced rendering. I suspect depth discontinuities would present themselves as flickering when a naive deinterlace method is used. The RE engine, used for Resident Evil titles, has demonstrated that interlace rendering can work well in those games. I suspect they probably use a temporal based interlaced rendering solution but I haven&rsquo;t done too much research on their implementation as there isn&rsquo;t any info about it that I could find.</p>
+<p>Bottom line is that this technique is very useful and can be considered an alternative to modern spatio-temporal upscalers. It&rsquo;s also much simpler to implement and maintain than any upscaler, except for maybe FSR 1.0 since it is just a spatial upscaler. I do wish more developers would consider using and iterating on techniques like interlaced and checkerboard rendering as I think they can be improved even more. This can then offer more options to gamers as there is a camp that does not like the softness of images or ghosting artifacts produced by DLSS and its ilk while others have less tolerance for jaggies so they opt for upscalers.</p>
+
+			</div>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://yggdrasil-917.github.io/posts/tempest-engine-loop/tempest-engine-loop/">
+				<span class="post-nav-label">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Tempest Engine Loop</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+<script src="https://utteranc.es/client.js"
+        repo="yggdrasil-917/yggdrasil-917.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</div>
+	</main>
+
+<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+	<p>
+		&copy; 2024 <a href="https://yggdrasil-917.github.io/"></a>
+		&#183; XGH
+		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a></p>
+
+</footer>
+<script async src="https://yggdrasil-917.github.io/js/bundle.min.c7c384e4d29d192bbac6811ae4660bb01767194a5bea56baca77e8260f93ea16.js" integrity="sha256-x8OE5NKdGSu6xoEa5GYLsBdnGUpb6la6ynfoJg+T6hY=" crossorigin="anonymous"></script><script async src="https://yggdrasil-917.github.io/js/link-share.min.24409a4f6e5537d70ffc55ec8f9192208d718678cb8638585342423020b37f39.js" integrity="sha256-JECaT25VN9cP/FXsj5GSII1xhnjLhjhYU0JCMCCzfzk=" crossorigin="anonymous"></script>
+</body>
+
+</html>
