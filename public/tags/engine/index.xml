@@ -6,12 +6,12 @@
     <description>Recent content in Engine on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jul 2024 17:58:27 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jul 2024 17:58:27 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/engine/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Scriptable Entity</title>
       <link>https://yggdrasil-917.github.io/posts/scriptable-entity/scriptable-entity/</link>
-      <pubDate>Fri, 26 Jul 2024 17:58:27 -0700</pubDate>
+      <pubDate>Sat, 27 Jul 2024 17:58:27 -0700</pubDate>
       <guid>https://yggdrasil-917.github.io/posts/scriptable-entity/scriptable-entity/</guid>
       <description>The Entity class is the base class in Tempest used for anything that can exist in the scene. This is comparable to the GameObject class in Unity or the Actor class in Unreal. Unlike the GameObject class in Unity however, entities do not require a transform component in order to exist in the scene. The class itself is very simple. All it has is an entity handle and a pointer to the scene that owns the entity.</description>
     </item>
