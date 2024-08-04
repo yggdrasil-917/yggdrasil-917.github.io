@@ -16,14 +16,14 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#494f5c"><meta name="author" content="">
 
   <meta itemprop="name" content="Game UI">
-  <meta itemprop="description" content="The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game’s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game’s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements.">
+  <meta itemprop="description" content="UI Requirements Logic Updates Rendering Stitching Triangle Strips 9-Slicing Sprite Basic Rich Text Support Localization Frosted Glass Look Creating GUI Content Limitations Examples The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game’s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game’s UI.">
   <meta itemprop="datePublished" content="2024-08-02T16:12:16-07:00">
   <meta itemprop="dateModified" content="2024-08-02T16:12:16-07:00">
-  <meta itemprop="wordCount" content="3019">
+  <meta itemprop="wordCount" content="3042">
   <meta itemprop="keywords" content="Rendering,UI"><meta property="og:url" content="https://yggdrasil-917.github.io/posts/game-ui/game-ui/">
   <meta property="og:site_name" content="Tempest Engine Dev">
   <meta property="og:title" content="Game UI">
-  <meta property="og:description" content="The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game’s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game’s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements.">
+  <meta property="og:description" content="UI Requirements Logic Updates Rendering Stitching Triangle Strips 9-Slicing Sprite Basic Rich Text Support Localization Frosted Glass Look Creating GUI Content Limitations Examples The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game’s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game’s UI.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -34,7 +34,7 @@
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Game UI">
-  <meta name="twitter:description" content="The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game’s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game’s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements.">
+  <meta name="twitter:description" content="UI Requirements Logic Updates Rendering Stitching Triangle Strips 9-Slicing Sprite Basic Rich Text Support Localization Frosted Glass Look Creating GUI Content Limitations Examples The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game’s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game’s UI.">
 <title>Game UI</title>
 <link rel="stylesheet dns-prefetch preconnect preload prefetch" as="style" href="https://yggdrasil-917.github.io/css/style.min.53a53ff9a700cf26a907d20cff4ca6268650da3c0980ef01164d230678d732e7.css" integrity="sha256-U6U/+acAzyapB9IM/0ymJoZQ2jwJgO8BFk0jBnjXMuc=" crossorigin="anonymous">
 	</head>
@@ -96,11 +96,24 @@
     
     
     
-    13 Minutes, 43 Seconds</p>
+    13 Minutes, 49 Seconds</p>
 <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-08-02 16:12 -0700</p></div>
 			<hr class="post-end">
 			<div class="content">
-				<p>The Tempest engine has support for two UI systems. It makes heavy use of <a href="https://github.com/ocornut/imgui">Dear ImGui</a> for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game&rsquo;s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game&rsquo;s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements. The immediate mode design of the API can also be a big factor for some. Eventually a custom game UI system was designed to meet the needs of the game being made with Tempest and most of it has been developed by this point. This post will cover many aspects of the game UI system developed so far.</p>
+				<ul>
+<li><a href="#ui-requirements">UI Requirements</a></li>
+<li><a href="#logic-updates">Logic Updates</a></li>
+<li><a href="#rendering">Rendering</a></li>
+<li><a href="#stitching-triangle-strips">Stitching Triangle Strips</a></li>
+<li><a href="#9-slicing-sprite">9-Slicing Sprite</a></li>
+<li><a href="#basic-rich-text-support">Basic Rich Text Support</a></li>
+<li><a href="#localization">Localization</a></li>
+<li><a href="#frosted-glass-look">Frosted Glass Look</a></li>
+<li><a href="#creating-gUI-content">Creating GUI Content</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+<p>The Tempest engine has support for two UI systems. It makes heavy use of <a href="https://github.com/ocornut/imgui">Dear ImGui</a> for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game&rsquo;s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game&rsquo;s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements. The immediate mode design of the API can also be a big factor for some. Eventually a custom game UI system was designed to meet the needs of the game being made with Tempest and most of it has been developed by this point. This post will cover many aspects of the game UI system developed so far.</p>
 <h2 id="ui-requirements">UI Requirements<a href="#ui-requirements" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 <p>The most important idea driving the requirements for this game UI system is that it is perfectly fine that it does not have many features but the features it does have work great. Having a general idea of what the UI will be like for the game helps tremendously to narrow down the requirements for the system.</p>
 <p>So what are the specific UI requirements needed for the game?</p>
@@ -190,8 +203,7 @@
 		&copy; 2024 <a href="https://yggdrasil-917.github.io/"></a>
 		&#183; XGH
 		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
-		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a>
-		&#183; <a href="https://yggdrasil-917.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></p>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a></p>
 
 </footer>
 <script async src="https://yggdrasil-917.github.io/js/bundle.min.c7c384e4d29d192bbac6811ae4660bb01767194a5bea56baca77e8260f93ea16.js" integrity="sha256-x8OE5NKdGSu6xoEa5GYLsBdnGUpb6la6ynfoJg+T6hY=" crossorigin="anonymous"></script><script async src="https://yggdrasil-917.github.io/js/link-share.min.24409a4f6e5537d70ffc55ec8f9192208d718678cb8638585342423020b37f39.js" integrity="sha256-JECaT25VN9cP/FXsj5GSII1xhnjLhjhYU0JCMCCzfzk=" crossorigin="anonymous"></script>

@@ -15,7 +15,20 @@
 			
 			<guid>https://yggdrasil-917.github.io/posts/game-ui/game-ui/</guid>
 			<description><![CDATA[%!s(<nil>)]]></description>
-			<content type="html"><![CDATA[<p>The Tempest engine has support for two UI systems. It makes heavy use of <a href="https://github.com/ocornut/imgui">Dear ImGui</a> for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game&rsquo;s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game&rsquo;s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements. The immediate mode design of the API can also be a big factor for some. Eventually a custom game UI system was designed to meet the needs of the game being made with Tempest and most of it has been developed by this point. This post will cover many aspects of the game UI system developed so far.</p>
+			<content type="html"><![CDATA[<ul>
+<li><a href="#ui-requirements">UI Requirements</a></li>
+<li><a href="#logic-updates">Logic Updates</a></li>
+<li><a href="#rendering">Rendering</a></li>
+<li><a href="#stitching-triangle-strips">Stitching Triangle Strips</a></li>
+<li><a href="#9-slicing-sprite">9-Slicing Sprite</a></li>
+<li><a href="#basic-rich-text-support">Basic Rich Text Support</a></li>
+<li><a href="#localization">Localization</a></li>
+<li><a href="#frosted-glass-look">Frosted Glass Look</a></li>
+<li><a href="#creating-gUI-content">Creating GUI Content</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+<p>The Tempest engine has support for two UI systems. It makes heavy use of <a href="https://github.com/ocornut/imgui">Dear ImGui</a> for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game&rsquo;s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game&rsquo;s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements. The immediate mode design of the API can also be a big factor for some. Eventually a custom game UI system was designed to meet the needs of the game being made with Tempest and most of it has been developed by this point. This post will cover many aspects of the game UI system developed so far.</p>
 <h2 id="ui-requirements">UI Requirements</h2>
 <p>The most important idea driving the requirements for this game UI system is that it is perfectly fine that it does not have many features but the features it does have work great. Having a general idea of what the UI will be like for the game helps tremendously to narrow down the requirements for the system.</p>
 <p>So what are the specific UI requirements needed for the game?</p>

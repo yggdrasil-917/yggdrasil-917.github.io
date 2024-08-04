@@ -9,6 +9,18 @@ tags:
   - UI
 ---
 
+* [UI Requirements](#ui-requirements)
+* [Logic Updates](#logic-updates)
+* [Rendering](#rendering)
+* [Stitching Triangle Strips](#stitching-triangle-strips)
+* [9-Slicing Sprite](#9-slicing-sprite)
+* [Basic Rich Text Support](#basic-rich-text-support)
+* [Localization](#localization)
+* [Frosted Glass Look](#frosted-glass-look)
+* [Creating GUI Content](#creating-gUI-content)
+* [Limitations](#limitations)
+* [Examples](#examples)
+
 The Tempest engine has support for two UI systems. It makes heavy use of [Dear ImGui](https://github.com/ocornut/imgui) for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game's UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game's UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements. The immediate mode design of the API can also be a big factor for some. Eventually a custom game UI system was designed to meet the needs of the game being made with Tempest and most of it has been developed by this point. This post will cover many aspects of the game UI system developed so far.
 
 ## UI Requirements

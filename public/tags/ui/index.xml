@@ -13,7 +13,7 @@
       <link>https://yggdrasil-917.github.io/posts/game-ui/game-ui/</link>
       <pubDate>Fri, 02 Aug 2024 16:12:16 -0700</pubDate>
       <guid>https://yggdrasil-917.github.io/posts/game-ui/game-ui/</guid>
-      <description>The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game&amp;rsquo;s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game&amp;rsquo;s UI. There are multiple reasons for it but in my opinion one of the big reasons is that it is not trivial to re-skin the UI elements.</description>
+      <description>UI Requirements Logic Updates Rendering Stitching Triangle Strips 9-Slicing Sprite Basic Rich Text Support Localization Frosted Glass Look Creating GUI Content Limitations Examples The Tempest engine has support for two UI systems. It makes heavy use of Dear ImGui for the editor UI and the in-game debug console but there is also a custom UI system made to handle the game&amp;rsquo;s UI needs. As great as Dear ImGui is, you will rarely see it used in released titles, at least not as the main system behind a game&amp;rsquo;s UI.</description>
     </item>
   </channel>
 </rss>
