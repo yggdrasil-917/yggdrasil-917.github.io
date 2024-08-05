@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Localization on Tempest Engine Dev</title>
+    <link>https://yggdrasil-917.github.io/tags/localization/</link>
+    <description>Recent content in Localization on Tempest Engine Dev</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Aug 2024 17:41:30 -0700</lastBuildDate>
+    <atom:link href="https://yggdrasil-917.github.io/tags/localization/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Localizing Text</title>
+      <link>https://yggdrasil-917.github.io/posts/localizing-text/localizing-text/</link>
+      <pubDate>Sun, 04 Aug 2024 17:41:30 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/localizing-text/localizing-text/</guid>
+      <description>Localization is one of those things many people in game dev talk about but there doesn&amp;rsquo;t seem to be a consensus on whether it is valuable to do in your games. For every presentation or post-mortem talking about the benefits of it and how it was key to their success you can find an equal number stating it didn&amp;rsquo;t help. With that in mind, I&amp;rsquo;m not entirely sure if I will localize all the text in the game I&amp;rsquo;m making but that doesn&amp;rsquo;t mean that I did not make a system for localization just in case I do decide to do so.</description>
+    </item>
+  </channel>
+</rss>

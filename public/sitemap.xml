@@ -2,26 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://yggdrasil-917.github.io/posts/game-ui/game-ui/</loc>
-    <lastmod>2024-08-02T16:12:16-07:00</lastmod>
+    <loc>https://yggdrasil-917.github.io/tags/engine/</loc>
+    <lastmod>2024-08-04T17:41:30-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/localization/</loc>
+    <lastmod>2024-08-04T17:41:30-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/posts/localizing-text/localizing-text/</loc>
+    <lastmod>2024-08-04T17:41:30-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/</loc>
+    <lastmod>2024-08-04T17:41:30-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/</loc>
+    <lastmod>2024-08-04T17:41:30-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/</loc>
+    <lastmod>2024-08-04T17:41:30-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/tools/</loc>
+    <lastmod>2024-08-04T17:41:30-07:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/posts/game-ui/game-ui/</loc>
     <lastmod>2024-08-02T16:12:16-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/tags/rendering/</loc>
     <lastmod>2024-08-02T16:12:16-07:00</lastmod>
   </url><url>
-    <loc>https://yggdrasil-917.github.io/tags/</loc>
-    <lastmod>2024-08-02T16:12:16-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/</loc>
-    <lastmod>2024-08-02T16:12:16-07:00</lastmod>
-  </url><url>
     <loc>https://yggdrasil-917.github.io/tags/ui/</loc>
     <lastmod>2024-08-02T16:12:16-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/tags/engine/</loc>
-    <lastmod>2024-07-27T17:58:27-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/scriptable-entity/scriptable-entity/</loc>
     <lastmod>2024-07-27T17:58:27-07:00</lastmod>
@@ -48,9 +57,6 @@
     <lastmod>2024-07-03T11:57:54-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/crash-reporting/crash-reporting/</loc>
-    <lastmod>2024-06-30T10:21:04-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/tags/tools/</loc>
     <lastmod>2024-06-30T10:21:04-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/shader-compiler/shader-compiler/</loc>
