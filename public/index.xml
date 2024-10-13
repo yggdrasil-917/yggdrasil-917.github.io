@@ -6,8 +6,22 @@
     <description>Recent content on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Aug 2024 17:41:30 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 12 Oct 2024 14:06:14 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Choosing A Game AI System - Behavior Trees</title>
+      <link>https://yggdrasil-917.github.io/posts/behavior-trees/behavior-trees/</link>
+      <pubDate>Sat, 12 Oct 2024 14:06:14 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/behavior-trees/behavior-trees/</guid>
+      <description>Behavior Trees Node Types Implementation Authoring BTs Downsides to BTs Once it was time to add an AI system to power the enemy AI for the game being made in Tempest I automatically defaulted to use behavior trees for it. This was mostly because it is what I was most familiar with at the time but wasn&amp;rsquo;t sure if it was the right fit for a tactical RPG game that has various job classes that can be mixed and matched.</description>
+    </item>
+    <item>
+      <title>Lens Flare</title>
+      <link>https://yggdrasil-917.github.io/posts/lens-flare/lens-flare/</link>
+      <pubDate>Sat, 14 Sep 2024 11:34:55 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/lens-flare/lens-flare/</guid>
+      <description>Overview Scriptable Object Asset Lens Flare Profile Lens Flare Occlusion Rendering Lens Flare Atlas Overview A lens flare is a phenomenon caused by the lens of an eye or camera when looking at very bright lights. In the real world the shapes produced by a lens flare are determined by many factors such as the shape of the lens. The different hardware configurations with cameras is one reason lens flare seen by the human eye are pretty different from lens flares created by a camera lens.</description>
+    </item>
     <item>
       <title>Localizing Text</title>
       <link>https://yggdrasil-917.github.io/posts/localizing-text/localizing-text/</link>

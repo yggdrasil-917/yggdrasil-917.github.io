@@ -6,8 +6,15 @@
     <description>Recent content in Editor on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Jul 2024 08:54:06 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 12 Oct 2024 14:06:14 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/editor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Choosing A Game AI System - Behavior Trees</title>
+      <link>https://yggdrasil-917.github.io/posts/behavior-trees/behavior-trees/</link>
+      <pubDate>Sat, 12 Oct 2024 14:06:14 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/behavior-trees/behavior-trees/</guid>
+      <description>Behavior Trees Node Types Implementation Authoring BTs Downsides to BTs Once it was time to add an AI system to power the enemy AI for the game being made in Tempest I automatically defaulted to use behavior trees for it. This was mostly because it is what I was most familiar with at the time but wasn&amp;rsquo;t sure if it was the right fit for a tactical RPG game that has various job classes that can be mixed and matched.</description>
+    </item>
     <item>
       <title>Tempest Gpu Frame</title>
       <link>https://yggdrasil-917.github.io/posts/tempest-gpu-frame/tempest-gpu-frame/</link>

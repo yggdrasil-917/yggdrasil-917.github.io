@@ -6,8 +6,15 @@
     <description>Recent content in Rendering on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Aug 2024 16:12:16 -0700</lastBuildDate>
+    <lastBuildDate>Sat, 14 Sep 2024 11:34:55 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/rendering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lens Flare</title>
+      <link>https://yggdrasil-917.github.io/posts/lens-flare/lens-flare/</link>
+      <pubDate>Sat, 14 Sep 2024 11:34:55 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/lens-flare/lens-flare/</guid>
+      <description>Overview Scriptable Object Asset Lens Flare Profile Lens Flare Occlusion Rendering Lens Flare Atlas Overview A lens flare is a phenomenon caused by the lens of an eye or camera when looking at very bright lights. In the real world the shapes produced by a lens flare are determined by many factors such as the shape of the lens. The different hardware configurations with cameras is one reason lens flare seen by the human eye are pretty different from lens flares created by a camera lens.</description>
+    </item>
     <item>
       <title>Game UI</title>
       <link>https://yggdrasil-917.github.io/posts/game-ui/game-ui/</link>
