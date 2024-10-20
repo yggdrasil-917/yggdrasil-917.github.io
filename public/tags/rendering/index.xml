@@ -13,7 +13,7 @@
       <link>https://yggdrasil-917.github.io/posts/dynamic-resolution/dynamic-resolution/</link>
       <pubDate>Fri, 18 Oct 2024 15:43:50 -0700</pubDate>
       <guid>https://yggdrasil-917.github.io/posts/dynamic-resolution/dynamic-resolution/</guid>
-      <description>Timing Your Application Configuring DRS How It Works Temporal Issues Shader Considerations Debugging Example Dynamic resolution scaling or DRS is a technique where the rendering resolution is changed dynamically at runtime in order to improve GPU performance. This can help provide a smoother overall framerate for an application at the cost of lowering the rendering resolution while still retaining the graphics settings specified by the player. However, DRS only makes sense when the application is bottlenecked by the GPU performance and, if properly implemented, will only do work when that is the case.</description>
+      <description>Timing Your Application Configuring DRS How It Works Temporal Issues Shader Considerations Debugging Example Dynamic resolution scaling or DRS is a technique where the rendering resolution is changed dynamically at runtime in order to improve GPU performance. This can help provide a smoother overall framerate for an application at the cost of lowering the image quality but still retaining the graphics settings specified by the player. However, DRS only makes sense when the application is bottlenecked by the GPU performance and, if properly implemented, will only do work when that is the case.</description>
     </item>
     <item>
       <title>Lens Flare</title>
