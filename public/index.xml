@@ -6,8 +6,15 @@
     <description>Recent content on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 18 Oct 2024 15:43:50 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 22 Oct 2024 12:12:21 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Choosing A Game AI System - Utility AI</title>
+      <link>https://yggdrasil-917.github.io/posts/utility-ai/utility-ai/</link>
+      <pubDate>Tue, 22 Oct 2024 12:12:21 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/utility-ai/utility-ai/</guid>
+      <description>Where To Start Response Curves Consistent Utility Scores Practical Usage Of Scores Inertia Closing Thoughts In a previous post I talked about my experience implementing behavior trees in Tempest and evaluating their results. As stated in that post, I did not feel behavior trees are the right solution for the kind of game I&amp;rsquo;m making so I set out to look for another alternative. Here I will cover one of the two alternatives I decided to look deeper into and that is Utility AI or sometimes refered to as Utility Theory.</description>
+    </item>
     <item>
       <title>Dynamic Resolution</title>
       <link>https://yggdrasil-917.github.io/posts/dynamic-resolution/dynamic-resolution/</link>
