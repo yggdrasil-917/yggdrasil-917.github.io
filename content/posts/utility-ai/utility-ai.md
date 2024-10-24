@@ -31,7 +31,7 @@ In Tempest, actions and scorers follow a C-like API as I felt an OOP design for 
 
 ## Response Curves
 
-Now we can dive into world of response curves. These are responsible for providing tunable ways to configure your scoring functions and it is safe to say that there is a ton of material to read on this subject. Creating easy to adjust performant curves is a challenging task on its own and it is something that many areas of mathemathics and engineering desire. I'll only cover a handful here but know that there's a lot more to learn for anyone curious about it. There's going to be plenty of screenshots of different curve functions and all of them made with [Desmos](https://www.desmos.com/calculator). I can't stress enough how valuable Desmos can be when coming up with new functions and visually seeing their output instantly.
+Now we can dive into the world of response curves. These are responsible for providing tunable ways to configure your scoring functions and it is safe to say that there is a ton of material to read on this subject. Creating easy to adjust performant curves is a challenging task on its own and it is something that many areas of mathemathics and engineering desire. I'll only cover a handful here but know that there's a lot more to learn for anyone curious about it. There's going to be plenty of screenshots of different curve functions used in Tempest and all of them made with [Desmos](https://www.desmos.com/calculator). I can't stress enough how valuable Desmos can be when coming up with new functions and visually seeing their output instantly.
 
 ### Linear Curve
 
@@ -70,6 +70,8 @@ This sigmoid function comes from a [blog post](https://dhemery.github.io/DHE-Mod
 As previously said, these are only a handful of curves out there. I didn't show curves like cosine or sine waves where you could change parameters like amplitude, phase, and wavelength to configure them. The ones covered will be useful for most scenarios you will encounter though.
 
 Having these curve types that are data driven rather than hand crafting them feels like it is a better approach than providing raw configurable Catmull-Rom type curves like I've discussed in a previous post. 
+
+Now I haven't discussed what curves to use for specific scorers as that to me is more of a game specific topic or maybe it's better to say that it is up to the AI designer to figure out what response curve best fits the feel they desire to achieve. The important part is providing customizable curves in a simple and easy to use manner.  
 
 ### Consistent Utility Scores
 
