@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge"><meta name="robots" content="index, follow">
+<meta name="revisit-after" content="15 days"><link rel="author" href="/humans.txt">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" href="/favicon.ico" type="image/x-icon"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+<meta name="theme-color" content="#494f5c">
+<meta name="msapplication-TileColor" content="#494f5c">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#494f5c"><meta name="author" content="">
+
+  <meta itemprop="name" content="Poor Man&#39;s Pausepoint">
+  <meta itemprop="description" content="If you’re familiar with the Jetbrains Rider IDE and have used it for Unity development then you may be aware of a feature they provide called pausepoints. Similar to normal breakpoints but, unlike them, they do not suspend the application nor give you call stack information. Instead it allows the developer to pause the editor when in play mode just like what happens when the user clicks the pause button in the game view.">
+  <meta itemprop="datePublished" content="2024-10-29T18:36:51-07:00">
+  <meta itemprop="dateModified" content="2024-10-29T18:36:51-07:00">
+  <meta itemprop="wordCount" content="1748">
+  <meta itemprop="keywords" content="Editor,Debugging"><meta property="og:url" content="https://yggdrasil-917.github.io/posts/poor-mans-pausepoint/poor-mans-pausepoint/">
+  <meta property="og:site_name" content="Tempest Engine Dev">
+  <meta property="og:title" content="Poor Man&#39;s Pausepoint">
+  <meta property="og:description" content="If you’re familiar with the Jetbrains Rider IDE and have used it for Unity development then you may be aware of a feature they provide called pausepoints. Similar to normal breakpoints but, unlike them, they do not suspend the application nor give you call stack information. Instead it allows the developer to pause the editor when in play mode just like what happens when the user clicks the pause button in the game view.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-29T18:36:51-07:00">
+    <meta property="article:modified_time" content="2024-10-29T18:36:51-07:00">
+    <meta property="article:tag" content="Editor">
+    <meta property="article:tag" content="Debugging">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Poor Man&#39;s Pausepoint">
+  <meta name="twitter:description" content="If you’re familiar with the Jetbrains Rider IDE and have used it for Unity development then you may be aware of a feature they provide called pausepoints. Similar to normal breakpoints but, unlike them, they do not suspend the application nor give you call stack information. Instead it allows the developer to pause the editor when in play mode just like what happens when the user clicks the pause button in the game view.">
+<title>Poor Man&#39;s Pausepoint</title>
+<link rel="stylesheet dns-prefetch preconnect preload prefetch" as="style" href="https://yggdrasil-917.github.io/css/style.min.53a53ff9a700cf26a907d20cff4ca6268650da3c0980ef01164d230678d732e7.css" integrity="sha256-U6U/+acAzyapB9IM/0ymJoZQ2jwJgO8BFk0jBnjXMuc=" crossorigin="anonymous">
+	</head>
+<body id="page">
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://yggdrasil-917.github.io/">Tempest Engine Dev</a>
+				</div>
+				<nav class="site-nav hide-in-mobile"><a href="https://yggdrasil-917.github.io/posts/">Posts</a><a href="https://yggdrasil-917.github.io/about">About</a></nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/yggdrasil-917" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="mailto:yggdrasil.917@gmail.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></span><button id="share-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></button>
+ 
+<div id="share-links" class="animated fast">
+    
+    
+    
+    
+    <ul>
+        <li>
+            <a href="https://twitter.com/intent/tweet?hashtags=hermit2&amp;url=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fpoor-mans-pausepoint%2fpoor-mans-pausepoint%2f&amp;text=Poor%20Man%27s%20Pausepoint" target="_blank" rel="noopener" aria-label="Share on X"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="st0" d="m21.3 21.1 -11.4 -18.2h-7.2l11.4 18.2zm-18.6 0 7.2 -6.6m4.2 -5 7.2 -6.6"/></svg></a>
+        </li>
+        <li>
+            <a href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fpoor-mans-pausepoint%2fpoor-mans-pausepoint%2f" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+        </li>
+        <li>
+            <a href="mailto:?subject=Poor%20Man%27s%20Pausepoint&amp;body=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fpoor-mans-pausepoint%2fpoor-mans-pausepoint%2f" target="_self" rel="noopener" aria-label="Share on Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+        </li>
+        <li>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fyggdrasil-917.github.io%2fposts%2fpoor-mans-pausepoint%2fpoor-mans-pausepoint%2f&amp;source=https%3a%2f%2fyggdrasil-917.github.io%2f&amp;title=Poor%20Man%27s%20Pausepoint&amp;summary=Poor%20Man%27s%20Pausepoint%2c%20by%20%3cnil%3e%0a%0a%3cnil%3e%0a" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+        </li>
+        <li>
+            <a href="#" onclick="linkShare(&#34;Poor Man&#39;s Pausepoint&#34;,&#34;https://yggdrasil-917.github.io/posts/poor-mans-pausepoint/poor-mans-pausepoint/&#34;,&#34;Poor Man&#39;s Pausepoint, by \u003cnil\u003e\n\n\u003cnil\u003e\n&#34;); return false;" target="_self" rel="noopener" aria-label="Copy Link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></a>
+        </li>
+    </ul>
+</div><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://yggdrasil-917.github.io/posts/">Posts</a></li>
+			<li><a href="https://yggdrasil-917.github.io/about">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster"><article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Oct 29, 2024</span></div>
+				<h1>Poor Man&#39;s Pausepoint</h1>
+			</header>
+			<div class="post-info"><p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg><a href="" target="_blank"></a></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://yggdrasil-917.github.io/tags/editor">editor</a></span><span class="tag"><a href="https://yggdrasil-917.github.io/tags/debugging">debugging</a></span></p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+    
+    
+    
+    
+    7 Minutes, 56 Seconds</p>
+<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2024-10-29 18:36 -0700</p></div>
+			<hr class="post-end">
+			<div class="content">
+				<p>If you&rsquo;re familiar with the Jetbrains Rider IDE and have used it for Unity development then you may be aware of a feature they provide called <a href="https://blog.jetbrains.com/dotnet/2020/06/11/introducing-unity-pausepoints-for-rider/">pausepoints</a>. Similar to normal breakpoints but, unlike them, they do not suspend the application nor give you call stack information. Instead it allows the developer to pause the editor when in play mode just like what happens when the user clicks the pause button in the game view. This means that scene edits can still happen as well as inspect and modify the values for anything spawned in the scene. This workflow can be invaluable for gameplay debugging or even tweaking gameplay data at runtime. In this post I will discuss a poor man&rsquo;s version of pausepoints that can be achieved in Tempest using Visual Studio and what it took to get there.</p>
+<h2 id="engine-architecture">Engine Architecture<a href="#engine-architecture" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Lets begin with what it took to get the editor pause functionality working. It first started with the easy part and that was extending the scene viewport toolabr to add a pause button. You may have seen in other posts screenshots of the editor where it had one single play button at the top middle of the scene viewport. There was already a pretty generic codebase supporting that play button so it didn&rsquo;t take much to extend it to add a new pause button and then adding a bit more code to keep track of the pause state for the button so the editor can inform the developer when it is enabled. Tempest editor UI uses the concept of signals to enable event driven execution. The pause button is no exception as it uses a signal that the editor can connect to in order to be notified of when it is pressed and handle the event accordingly. I&rsquo;ve added a screenshot below of what that toolbar looks like now and you may notice a third button in there as well which will be covered later on.</p>
+<p><img src="/images/poor-mans-pausepoint/NewButtons.png" alt="New Buttons" title="New Buttons"></p>
+<p>With that in place, we have an easy way to toggle the feature and be able to see its current state by looking at the color of the pause button. Now comes the slightly more difficult part, modifying the editor the support this &ldquo;paused&rdquo; mode. Before doing that it&rsquo;s worth discussing the requirements that this &ldquo;paused&rdquo; mode should achieve.</p>
+<ul>
+<li>Stop script updates - any gameplay script should not be simulating its logic</li>
+<li>Only transform component system should update - this allows selecting and moving entities in the scene while in paused mode</li>
+<li>Every editor feature works like normal</li>
+</ul>
+<p>Those are all the main <strong>must haves</strong> for this mode to be considered working properly. I&rsquo;ve already covered the engine loop before so I&rsquo;ll only cover the additions to support the pause mode. At every loop the engine will check to see if it is in pause mode just like the snippet below. It will also adjust the frame&rsquo;s delta time and other time variables if it is paused.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">FrameInfo</span> <span class="n">info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">info</span><span class="p">.</span><span class="n">enginePaused</span> <span class="o">=</span> <span class="n">sceneState</span> <span class="o">==</span> <span class="n">SceneState</span><span class="o">::</span><span class="n">Play</span> <span class="o">&amp;&amp;</span> <span class="n">enginePaused</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">localStepToNextFrame</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">info</span><span class="p">.</span><span class="n">enginePaused</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">info</span><span class="p">.</span><span class="n">deltaTime</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">info</span><span class="p">.</span><span class="n">fixedDeltaTime</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">info</span><span class="p">.</span><span class="n">unscaledDeltaTime</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">info</span><span class="p">.</span><span class="n">deltaTime</span> <span class="o">=</span> <span class="n">deltaTime</span> <span class="o">*</span> <span class="n">timeModulation</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">info</span><span class="p">.</span><span class="n">fixedDeltaTime</span> <span class="o">=</span> <span class="n">msPerUpdate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">info</span><span class="p">.</span><span class="n">unscaledDeltaTime</span> <span class="o">=</span> <span class="n">deltaTime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>FrameInfo</strong> is a POD struct with various useful frame specific info that gets passed to pretty all other subsystems in the engine. In the code snippet you will see that the engine will be considered to be in pause mode only when the scene is in play mode and if the pause button has been toggled on (that&rsquo;s what <strong>enginePaused</strong> is). If we are to simulate the next frame in paused mode then we make sure that any time variables will be set to 0 so as to not advance any simulations that are currently in progress.</p>
+<p>The scripting engine in Tempest has its own API locked away in its own library so it is very self contained. In order to not simulate any active scripts the engine skips simulating the scripts when the editor is paused similar to the snippet below.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">sceneState</span> <span class="o">==</span> <span class="n">SceneState</span><span class="o">::</span><span class="n">Play</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">enginePaused</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ScriptingEngine</span><span class="o">::</span><span class="n">OnSimulate</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">activeScene</span><span class="o">-&gt;</span><span class="n">OnUpdateRuntime</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">context</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Again the logic only happens when the active scene is in play mode and the engine has a single function to serve as the entry point to simulate all the active scripts in the scene. By skipping that when the editor is paused then we achieve one of the requirements for the pause mode. Namely stop script updates when paused.</p>
+<p>The last thing is that Tempest has the concept of a component system where generally speaking each engine level component has its own system that will handle logic updates and will use multithreading when it makes sense. For instance, the transform component has a system that will handle updating any dirty transform since the last update was done. To meet our second requirement to only update the transform component system, the engine relies on the FrameInfo::enginePaused member variable mentioned above. When that is set to true only the component systems marked as <strong>Very High</strong> priority will get updated and the rest will be ignored. The transform component system is one such system.</p>
+<p>With the Tempest codebase having minimal coupling with other parts I was actually able to achieve the third requirement for the &ldquo;paused&rdquo; mode definition in having the editor functionality just work as normal while being paused. At this point the groundwork for pausing the editor is complete and fully functional.</p>
+<p>Lets talk about the third button next to the pause button. As you may know, Unity has the same kind of button in their editor as well. It is used only when the editor is paused and allows stepping to the next frame while remaining paused after the step. This is super useful when debugging single frame bugs that can be tricky to find with normal means. After implementing the base pausing functionality, there was only a very small edit required to make this work. Like the pause button, the step button uses signals as well to inform the editor when it is pressed. After pressing the editor will flag a boolean to let it know that on the next frame it should step to it instead of remaining paused. After finishing the new frame that boolean is reset to false. What happens when we need to step into the next frame was already shown in the first code snippet above. The <strong>localStepToNextFrame</strong> variable determines if the time variables will be set to 0 or use the actual timing values that would normally be used. That&rsquo;s pretty much all there is to that functionality. Simple yet powerful.</p>
+<p>Now that Tempest has a way to pause the editor, we can extend it by adding a few more ways to trigger the pause functionality without having to click the button. An example of this is adding a console command that can trigger the pause so all the API around the console commands can be used to facilitate this. Other examples include adding easy to use functions in the gameplay layer so when certain conditions happen the editor could be paused from code. Think of <strong>Debug.Break</strong> in Unity. At some point I may also add a global keyboard shortcut to toggle the pause state but for now I haven&rsquo;t needed it.</p>
+<h2 id="pausepoints">Pausepoints<a href="#pausepoints" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>Rider offers a custom Unity plugin that offers many convenient features when working with Unity, one of them being pausepoints. The way it works is that it provides a modified breakpoint UI in the IDE so you can use pausepoints in the much the same way you do breakpoints. The workflow is you add a normal breakpoint where you want the pausepoint to be and then right click on it to convert it to a pausepoint. I set out to try to achieve something similar with Tempest but I quickly ran into many issues trying to build a custom IDE plugin for Tempest in Rider as well as Visual Studio. Main issue I ran into was a severe lack of documentation and the few examples available didn&rsquo;t really cover things you would need to know to make something useful. Needless to say after a day spent on this without making significant progress made me decide against making a custom IDE plugin.</p>
+<p>I decided to pivot into finding a way to achieve a fake pausepoint with the features available within Visual Studio. Eventually found a workflow that simulates a pausepoint though not as nice as having a custom plugin to facilitate it, hence why I call it the poor man&rsquo;s pausepoint.</p>
+<p>To emulate the pausepoint you start by placing a normal breakpoint where you would like to put the pausepoint and then let the editor trigger the breakpoint. Once that happens you can go to the watch window in Visual Studio and call a function to trigger the pause logic. Typically you use the watch window to actually watch variable values but a function call can actually be done. Tempest already has a static function that can trigger the pause logic and that is what is used inside the watch window. When doing that make sure you type the whole namespace chain to call the function instead of just the class name followed by the function name.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Be explicit and use all the namespace names the function lives in followed by class name and function name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Tempest</span><span class="o">::</span><span class="n">GameInstance</span><span class="o">::</span><span class="n">TriggerEditorPause</span><span class="p">()</span>
+</span></span></code></pre></div><p>Visual Studio also has the <strong>Immediate Window</strong> found in <strong>Debug &gt; Windows &gt; Immediate</strong> and you can do the same thing as in the watch window and type the function you want to call while the application has been suspended due to the breakpoint that was triggered. After typing the function and hitting the enter key you can remove the breakpoint and continue execution. In the next frame you will notice the pause logic has been triggered and you can use the editor like normal.</p>
+<p>This gives you the same results that the Rider plugin provides but requires a little extra work on the developer&rsquo;s part. In return you get a valuable feature and it&rsquo;s not a lot more work than what the Rider plugin requires so I wanted to share this. I also focused on using this workflow within Visual Studio but it also works in Rider too if you do the same thing in their equivalent watcher window UI. So you get a consistent workflow across IDEs without having to worry about implementing and maintaining different IDE plugins to provide this feature.</p>
+
+			</div>
+		</article>
+		<div class="post-nav thin">
+			<a class="prev-post" href="https://yggdrasil-917.github.io/posts/utility-ai/utility-ai/">
+				<span class="post-nav-label">&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Choosing A Game AI System - Utility AI</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+<script src="https://utteranc.es/client.js"
+        repo="yggdrasil-917/yggdrasil-917.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+</div>
+	</main>
+
+<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+	<p>
+		&copy; 2024 <a href="https://yggdrasil-917.github.io/"></a>
+		&#183; XGH
+		&#183; Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>
+		&#183; Theme <a href="https://github.com/1bl4z3r/hermit-V2" target="_blank" rel="noopener">Hermit-V2</a></p>
+
+</footer>
+<script async src="https://yggdrasil-917.github.io/js/bundle.min.c7c384e4d29d192bbac6811ae4660bb01767194a5bea56baca77e8260f93ea16.js" integrity="sha256-x8OE5NKdGSu6xoEa5GYLsBdnGUpb6la6ynfoJg+T6hY=" crossorigin="anonymous"></script><script async src="https://yggdrasil-917.github.io/js/link-share.min.24409a4f6e5537d70ffc55ec8f9192208d718678cb8638585342423020b37f39.js" integrity="sha256-JECaT25VN9cP/FXsj5GSII1xhnjLhjhYU0JCMCCzfzk=" crossorigin="anonymous"></script>
+</body>
+
+</html>

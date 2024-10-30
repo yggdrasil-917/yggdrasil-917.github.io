@@ -6,8 +6,15 @@
     <description>Recent content in Editor on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 12 Oct 2024 14:06:14 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 29 Oct 2024 18:36:51 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/tags/editor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Poor Man&#39;s Pausepoint</title>
+      <link>https://yggdrasil-917.github.io/posts/poor-mans-pausepoint/poor-mans-pausepoint/</link>
+      <pubDate>Tue, 29 Oct 2024 18:36:51 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/poor-mans-pausepoint/poor-mans-pausepoint/</guid>
+      <description>If you&amp;rsquo;re familiar with the Jetbrains Rider IDE and have used it for Unity development then you may be aware of a feature they provide called pausepoints. Similar to normal breakpoints but, unlike them, they do not suspend the application nor give you call stack information. Instead it allows the developer to pause the editor when in play mode just like what happens when the user clicks the pause button in the game view.</description>
+    </item>
     <item>
       <title>Choosing A Game AI System - Behavior Trees</title>
       <link>https://yggdrasil-917.github.io/posts/behavior-trees/behavior-trees/</link>
