@@ -2,6 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://yggdrasil-917.github.io/posts/</loc>
+    <lastmod>2025-02-10T08:22:09-08:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/posts/reflections-using-oblique-projections/reflections-using-oblique-projections/</loc>
+    <lastmod>2025-02-10T08:22:09-08:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/rendering/</loc>
+    <lastmod>2025-02-10T08:22:09-08:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/tags/</loc>
+    <lastmod>2025-02-10T08:22:09-08:00</lastmod>
+  </url><url>
+    <loc>https://yggdrasil-917.github.io/</loc>
+    <lastmod>2025-02-10T08:22:09-08:00</lastmod>
+  </url><url>
     <loc>https://yggdrasil-917.github.io/tags/debugging/</loc>
     <lastmod>2024-10-29T18:36:51-07:00</lastmod>
   </url><url>
@@ -11,15 +26,6 @@
     <loc>https://yggdrasil-917.github.io/posts/poor-mans-pausepoint/poor-mans-pausepoint/</loc>
     <lastmod>2024-10-29T18:36:51-07:00</lastmod>
   </url><url>
-    <loc>https://yggdrasil-917.github.io/posts/</loc>
-    <lastmod>2024-10-29T18:36:51-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/tags/</loc>
-    <lastmod>2024-10-29T18:36:51-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/</loc>
-    <lastmod>2024-10-29T18:36:51-07:00</lastmod>
-  </url><url>
     <loc>https://yggdrasil-917.github.io/tags/ai/</loc>
     <lastmod>2024-10-22T12:12:21-07:00</lastmod>
   </url><url>
@@ -27,9 +33,6 @@
     <lastmod>2024-10-22T12:12:21-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/dynamic-resolution/dynamic-resolution/</loc>
-    <lastmod>2024-10-18T15:43:50-07:00</lastmod>
-  </url><url>
-    <loc>https://yggdrasil-917.github.io/tags/rendering/</loc>
     <lastmod>2024-10-18T15:43:50-07:00</lastmod>
   </url><url>
     <loc>https://yggdrasil-917.github.io/posts/behavior-trees/behavior-trees/</loc>
