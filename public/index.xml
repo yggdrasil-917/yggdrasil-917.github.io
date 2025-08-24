@@ -6,8 +6,15 @@
     <description>Recent content on Tempest Engine Dev</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Feb 2025 08:22:09 -0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 Aug 2025 20:21:31 -0700</lastBuildDate>
     <atom:link href="https://yggdrasil-917.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fluid Fog</title>
+      <link>https://yggdrasil-917.github.io/posts/fluid-fog/fluid-fog/</link>
+      <pubDate>Fri, 22 Aug 2025 20:21:31 -0700</pubDate>
+      <guid>https://yggdrasil-917.github.io/posts/fluid-fog/fluid-fog/</guid>
+      <description>Motivation Technique Overview Fluid Simulation Architecture FluidEmitterComponent FluidContainerComponent Fluid Rendering Before getting into the details below is an example of the fluid fog running in one of the levels of my game. I recommend putting the video in fullscreen to see the details. You&amp;rsquo;ll see how the fog is reacting to the characters moving in the fog. Your browser does not support the video tag. Motivation Ground fog has been a rendering feature used in games many times before by this point however, it typically is an effect that does not react to players or the world around it.</description>
+    </item>
     <item>
       <title>Reflections Using Oblique Projections</title>
       <link>https://yggdrasil-917.github.io/posts/reflections-using-oblique-projections/reflections-using-oblique-projections/</link>
