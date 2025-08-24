@@ -10,6 +10,11 @@ enableEmoji = true
 
 [taxonomies]
   tag = "tags"
+  
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 [params.utterances]
   repo = "yggdrasil-917/yggdrasil-917.github.io"
